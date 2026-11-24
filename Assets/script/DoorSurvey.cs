@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 문 앞 영역(트리거)에 플레이어가 들어오면 불편한 자세를 묻고, 끝나면 문의 잠금을 푼다.
-[RequireComponent(typeof(Collider))]
+// 문 앞 트리거 또는 에디터 UI 팝업에서 불편한 자세를 선택받아 AI 트레이너(DoorSurvey.Summary)에 전달한다.
 public class DoorSurvey : MonoBehaviour
 {
     [SerializeField] Font font;
@@ -14,15 +13,51 @@ public class DoorSurvey : MonoBehaviour
     // 트레이너에게 질문할 때 같이 보낸다.
     public static string Summary { get; private set; } = "없음";
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetSummary() => Summary = "없음";
+
     readonly List<string> picked = new();
     bool done;
     GameObject root;
 
-    void Start() => door.SetLocked(true); // 설문 전에는 문이 열리지 않는다
+    static readonly Color OffColor = new Color(0.165f, 0.204f, 0.278f, 1f); // #2A3447
+    static readonly Color OnColor  = new Color(0.133f, 0.651f, 0.498f, 1f); // #22A67F
+
+    void Start()
+    {
+        if (door != null) door.SetLocked(true); // 문 트리거 모드일 때만 문을 잠근다
+    }
+
+    // 에디터에서 만든 선택 버튼의 OnClick에 연결해서 토글한다.
+    public void ToggleOptionButton(Button btn)
+    {
+        if (btn == null) return;
+        var label = btn.GetComponentInChildren<Text>();
+        if (label == null) return;
+
+        string raw = label.text.StartsWith("✓ ") ? label.text.Substring(2) : label.text;
+        bool isOn;
+        if (picked.Remove(raw))
+        {
+            isOn = false;
+        }
+        else
+        {
+            picked.Add(raw);
+            isOn = true;
+        }
+
+        if (btn.targetGraphic != null)
+            btn.targetGraphic.color = isOn ? OnColor : OffColor;
+        label.text = isOn ? ("✓ " + raw) : raw;
+
+        Summary = picked.Count == 0 ? "없음" : string.Join(", ", picked);
+        Debug.Log("[설문] 불편한 자세: " + Summary);
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (done || root != null || !other.CompareTag(playerTag)) return;
+        if (door == null || done || root != null || !other.CompareTag(playerTag)) return;
         Build();
     }
 
@@ -58,7 +93,7 @@ public class DoorSurvey : MonoBehaviour
         done = true;
         PlayerFreeze.Pop();
         Destroy(root);
-        door.SetLocked(false);
+        if (door != null) door.SetLocked(false);
         Debug.Log("[설문] 불편한 자세: " + Summary);
     }
 }

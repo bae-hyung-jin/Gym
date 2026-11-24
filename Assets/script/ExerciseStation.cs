@@ -74,6 +74,7 @@ public class ExerciseStation : MonoBehaviour
 
     void Update()
     {
+        if (seatPoint == null || player == null || machine == null || facing == null) return;
         var kb = Keyboard.current; var mouse = Mouse.current;
         if (kb == null || mouse == null) return;
 

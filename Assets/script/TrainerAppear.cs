@@ -50,7 +50,7 @@ public class TrainerAppear : MonoBehaviour
     public void StartCoaching(Transform seat, Transform facing, Animator playerAnim)
     {
         busy = true;
-        trainer.SetActive(false);
+        if (trainer != null) trainer.SetActive(false);
         if (coachAvatar != null) Destroy(coachAvatar);
 
         EnsureCoachPrefab();
@@ -128,12 +128,13 @@ public class TrainerAppear : MonoBehaviour
         var pr = (RectTransform)panel.transform; pr.anchorMin = new Vector2(0, 0); pr.anchorMax = new Vector2(1, 0); pr.pivot = new Vector2(0.5f, 0); pr.offsetMin = new Vector2(30, 260); pr.offsetMax = new Vector2(-30, 450); // 아래의 '질문하기' 버튼(~135)과 운동 중 큰 버튼(~240) 위로 올린다
         var lr = label.rectTransform; lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one; lr.offsetMin = new Vector2(24, 8); lr.offsetMax = new Vector2(-24, -8);
         panel.SetActive(false);
-        trainer.SetActive(false);
-        machine.enabled = false;
+        if (trainer != null) trainer.SetActive(false);
+        if (machine != null) machine.enabled = false;
     }
 
     void Update()
     {
+        if (anchor == null && trainer == null) return;
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -158,11 +159,14 @@ public class TrainerAppear : MonoBehaviour
 
     void Appear()
     {
-        trainer.SetActive(true);
+        if (trainer != null) trainer.SetActive(true);
         if (trainerAnim != null) { trainerAnim.Rebind(); trainerAnim.Update(0f); }
-        machine.enabled = true;
-        machine.speed = 1f; // 직접 운동할 때 0으로 멈춰 둔 것을 되돌린다
-        machine.Play("Pull", 0, 0f);
+        if (machine != null)
+        {
+            machine.enabled = true;
+            machine.speed = 1f; // 직접 운동할 때 0으로 멈춰 둔 것을 되돌린다
+            machine.Play("Pull", 0, 0f);
+        }
         panel.SetActive(true);
         if (!string.IsNullOrEmpty(customGreetingText))
         {
@@ -190,9 +194,12 @@ public class TrainerAppear : MonoBehaviour
     void Disappear()
     {
         voice?.Stop();
-        trainer.SetActive(false);
-        machine.Rebind(); machine.Update(0f); // 바를 처음 자리로 돌려놓고 멈춘다
-        machine.enabled = false;
+        if (trainer != null) trainer.SetActive(false);
+        if (machine != null)
+        {
+            machine.Rebind(); machine.Update(0f); // 바를 처음 자리로 돌려놓고 멈춘다
+            machine.enabled = false;
+        }
         panel.SetActive(false);
     }
 }

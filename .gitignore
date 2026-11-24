@@ -118,3 +118,7 @@ InitTestScene*.unity*
 
 # Gemini key variants (never commit)
 /[Aa]ssets/Resources/gemini_key*
+
+# Large local Blender archives / backups (prevent GitHub 100MB push rejection)
+/_blender/Archive/
+*.blend1
