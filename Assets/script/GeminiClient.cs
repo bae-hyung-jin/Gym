@@ -8,9 +8,9 @@ using UnityEngine.Networking;
 public class GeminiClient : MonoBehaviour
 {
     // GeminiClient.cs 상단 모델 선언부
-    // 직접 재 보니 3.5-flash-lite가 1~2초, 3.8-flash는 과부하(503)로 7~30초였다. 빠른 쪽을 메인으로 쓴다.
-    [SerializeField] string model = "gemini-3.5-flash-lite";
-    [SerializeField] string fallbackModel = "gemini-3.1-flash-lite"; // 대체: 503/429 발생 시 넘어갈 폴백 모델
+    // 최신 Gemini 4 빠르고 정확한 기본 모델(gemini-4-hydrogen)을 메인으로, 초고속 gemini-3.5-flash-lite를 폴백으로 쓴다.
+    [SerializeField] string model = "gemini-4-hydrogen";
+    [SerializeField] string fallbackModel = "gemini-3.5-flash-lite"; // 대체: 503/429 발생 시 넘어갈 폴백 모델
     [TextArea, SerializeField] string systemPrompt =
         "너는 어르신을 돕는 헬스장 AI 트레이너다. 두세 문장으로 쉽고 다정하게 한국어로 답한다. " +
         "'광배근' 같은 어려운 말 대신 '등 근육'처럼 쉬운 말을 쓴다. 아프다는 말이 나오면 운동을 멈추고 쉬게 하며, 병이나 치료는 단정하지 않는다. " +
@@ -52,18 +52,18 @@ public class GeminiClient : MonoBehaviour
 
     void Awake()
     {
-        // 씬에 예전 모델명(느리거나 과부하인 것)이 저장돼 있으면 빠른 모델로 바꾼다
-        if (string.IsNullOrEmpty(model) || model == "gemini-3.8-flash" || model == "gemini-3.6-flash" || model == "gemini-3.5-flash" || model == "gemini-3.1-flash-lite")
-            model = "gemini-3.5-flash-lite";
-        if (string.IsNullOrEmpty(fallbackModel) || fallbackModel == "gemini-3.5-flash" || fallbackModel == "gemini-3.5-flash-lite" || fallbackModel == "gemini-3.1-pro")
-            fallbackModel = "gemini-3.1-flash-lite";
+        // 씬에 예전 모델명이 저장돼 있으면 최신 Gemini 4 기본 모델로 자동 업그레이드한다
+        if (string.IsNullOrEmpty(model) || model == "gemini-3.8-flash" || model == "gemini-3.6-flash" || model == "gemini-3.5-flash" || model == "gemini-3.5-flash-lite" || model == "gemini-3.1-flash-lite" || model.StartsWith("gemini-2.") || model.StartsWith("gemini-1."))
+            model = "gemini-4-hydrogen";
+        if (string.IsNullOrEmpty(fallbackModel) || fallbackModel == "gemini-3.5-flash" || fallbackModel == "gemini-3.1-flash-lite" || fallbackModel == "gemini-3.1-pro" || fallbackModel.StartsWith("gemini-2.") || fallbackModel.StartsWith("gemini-1."))
+            fallbackModel = "gemini-3.5-flash-lite";
 
         StartCoroutine(EnsureApiKey());
     }
 
     [Serializable] class Part { public string text; }
     [Serializable] class Content { public Part[] parts; }
-    [Serializable] class GenCfg { public int maxOutputTokens = 220; } // 답이 길어지면 늦어지므로 짧게 끊는다
+    [Serializable] class GenCfg { public int maxOutputTokens = 320; } // 짧은 코칭 답변용 출력 토큰 제한
     [Serializable] class Request { public Content system_instruction; public Content[] contents; public GenCfg generationConfig = new GenCfg(); }
     [Serializable] class Candidate { public Content content; }
     [Serializable] class Response { public Candidate[] candidates; }
@@ -149,10 +149,10 @@ public class GeminiClient : MonoBehaviour
     [Serializable] class AudioCandidate { public AudioContent content; }
     [Serializable] class AudioResponse { public AudioCandidate[] candidates; }
 
-    // Interactions API schema
+    // Interactions API schema (REST returns steps[].content[] audio blocks)
     [Serializable] class TtsInterContent { public string type = "text"; public string text; }
     [Serializable] class TtsInterInput { public string type = "user_input"; public TtsInterContent[] content; }
-    [Serializable] class TtsInterRespFormat { public string type = "audio"; public string mime_type = "audio/wav"; public int sample_rate = 24000; }
+    [Serializable] class TtsInterRespFormat { public string type = "audio"; }
     [Serializable] class TtsInterVoice { public string voice; }
     [Serializable] class TtsInterGenCfg { public TtsInterVoice[] speech_config; }
     [Serializable] class TtsInterReq
@@ -162,8 +162,9 @@ public class GeminiClient : MonoBehaviour
         public TtsInterRespFormat response_format;
         public TtsInterGenCfg generation_config;
     }
-    [Serializable] class TtsInterAudio { public string data; public string mime_type; }
-    [Serializable] class TtsInterRes { public TtsInterAudio output_audio; }
+    [Serializable] class TtsInterAudio { public string type; public string data; public string mime_type; }
+    [Serializable] class TtsInterStep { public string type; public TtsInterAudio[] content; }
+    [Serializable] class TtsInterRes { public TtsInterStep[] steps; public TtsInterAudio output_audio; }
 
     // 글을 음성으로 바꿔 AudioClip으로 돌려준다. 실패하면 null.
     public void Synthesize(string text, Action<AudioClip> onDone) => StartCoroutine(SynthRoutine(text, onDone));
@@ -180,35 +181,58 @@ public class GeminiClient : MonoBehaviour
 
         if (!string.IsNullOrEmpty(apiKey))
         {
-            // 1. Interactions API 시도 (gemini-3.8-flash-tts 공식 규격)
-            var interBody = new TtsInterReq
+            // 1. Interactions API 시도 (gemini-3.8-flash-tts / gemini-3.8-flash-lite-tts 공식 REST 규격)
+            foreach (var tm in new[] { ttsModel, ttsFallbackModel })
             {
-                model = ttsModel,
-                input = new[] { new TtsInterInput { content = new[] { new TtsInterContent { text = text } } } },
-                response_format = new TtsInterRespFormat(),
-                generation_config = new TtsInterGenCfg { speech_config = new[] { new TtsInterVoice { voice = voiceName } } }
-            };
-            var interJson = Encoding.UTF8.GetBytes(JsonUtility.ToJson(interBody));
-            using (var req = new UnityWebRequest($"https://generativelanguage.googleapis.com/v1beta/interactions?key={apiKey}", "POST"))
-            {
-                req.uploadHandler = new UploadHandlerRaw(interJson);
-                req.downloadHandler = new DownloadHandlerBuffer();
-                req.SetRequestHeader("Content-Type", "application/json");
-                req.SetRequestHeader("x-goog-api-key", apiKey);
-                req.timeout = 5;
-                yield return req.SendWebRequest();
-                if (req.result == UnityWebRequest.Result.Success)
+                if (string.IsNullOrEmpty(tm)) continue;
+                var interBody = new TtsInterReq
                 {
-                    var res = JsonUtility.FromJson<TtsInterRes>(req.downloadHandler.text);
-                    if (res?.output_audio != null && !string.IsNullOrEmpty(res.output_audio.data))
+                    model = tm,
+                    input = new[] { new TtsInterInput { content = new[] { new TtsInterContent { text = text } } } },
+                    response_format = new TtsInterRespFormat(),
+                    generation_config = new TtsInterGenCfg { speech_config = new[] { new TtsInterVoice { voice = voiceName } } }
+                };
+                var interJson = Encoding.UTF8.GetBytes(JsonUtility.ToJson(interBody));
+                using (var req = new UnityWebRequest("https://generativelanguage.googleapis.com/v1beta/interactions", "POST"))
+                {
+                    req.uploadHandler = new UploadHandlerRaw(interJson);
+                    req.downloadHandler = new DownloadHandlerBuffer();
+                    req.SetRequestHeader("Content-Type", "application/json");
+                    req.SetRequestHeader("x-goog-api-key", apiKey);
+                    req.timeout = 6;
+                    yield return req.SendWebRequest();
+                    if (req.result == UnityWebRequest.Result.Success)
                     {
-                        var clip = ToClip(Convert.FromBase64String(res.output_audio.data), res.output_audio.mime_type);
-                        if (clip != null) { onDone(clip); yield break; }
+                        var res = JsonUtility.FromJson<TtsInterRes>(req.downloadHandler.text);
+                        TtsInterAudio aud = res?.output_audio;
+                        if ((aud == null || string.IsNullOrEmpty(aud.data)) && res?.steps != null)
+                        {
+                            for (int s = res.steps.Length - 1; s >= 0 && aud == null; s--)
+                            {
+                                var st = res.steps[s];
+                                if (st?.type == "model_output" && st.content != null)
+                                {
+                                    for (int c = st.content.Length - 1; c >= 0; c--)
+                                    {
+                                        if (st.content[c]?.type == "audio" && !string.IsNullOrEmpty(st.content[c].data))
+                                        {
+                                            aud = st.content[c];
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (aud != null && !string.IsNullOrEmpty(aud.data))
+                        {
+                            var clip = ToClip(Convert.FromBase64String(aud.data), aud.mime_type);
+                            if (clip != null) { onDone(clip); yield break; }
+                        }
                     }
-                }
-                else
-                {
-                    Debug.LogWarning($"[Gemini Interactions TTS] 실패 {req.responseCode} {req.error}");
+                    else
+                    {
+                        Debug.LogWarning($"[Gemini Interactions TTS] {tm} 실패 {req.responseCode} {req.error}");
+                    }
                 }
             }
 

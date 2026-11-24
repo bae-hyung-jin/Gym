@@ -14273,8 +14273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f5602e9f5cde4499a8253e01feb2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeminiClient
-  model: gemini-3.5-flash-lite
-  fallbackModel: gemini-3.1-flash-lite
+  model: gemini-4-hydrogen
+  fallbackModel: gemini-3.5-flash-lite
   systemPrompt: "\uB108\uB294 \uC5B4\uB974\uC2E0\uC744 \uB3D5\uB294 \uD5EC\uC2A4\uC7A5 AI \uD2B8\uB808\uC774\uB108\uB2E4. \uB450\uC138 \uBB38\uC7A5\uC73C\uB85C \uC27D\uACE0 \uB2E4\uC815\uD558\uAC8C \uD55C\uAD6D\uC5B4\uB85C \uB2F5\uD55C\uB2E4. '\uAD11\uBC30\uADFC' \uAC19\uC740 \uC5B4\uB824\uC6B4 \uB9D0 \uB300\uC2E0 '\uB4F1 \uADFC\uC721'\uCC98\uB7FC \uC26C\uC6B4 \uB9D0\uC744 \uC4F4\uB2E4. \uC544\uD504\uB2E4\uB294 \uB9D0\uC774 \uB098\uC624\uBA74 \uC6B4\uB3D9\uC744 \uBA48\uCD94\uACE0 \uC26C\uAC8C \uD558\uBA70, \uBCD1\uC774\uB098 \uCE58\uB8CC\uB294 \uB2E8\uC815\uD558\uC9C0 \uC54A\uB294\uB2E4. \uD69F\uC218\uB97C \uAD8C\uD560 \uB54C\uB294 10\uD68C \uC548\uD30E\uC73C\uB85C \uAC00\uBCCD\uAC8C, \uC26C\uC5C8\uB2E4 \uD574\uB3C4 \uB41C\uB2E4\uACE0 \uB9D0\uD55C\uB2E4."
   fallbackApiKey: 
   ttsModel: gemini-3.8-flash-tts
