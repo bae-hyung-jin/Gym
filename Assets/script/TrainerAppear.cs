@@ -15,6 +15,10 @@ public class TrainerAppear : MonoBehaviour
     [SerializeField] float range = 5f;
     [SerializeField] string playerTag = "Player";
     [SerializeField] GameObject coachPrefab; // 플레이어가 운동할 때 옆에 서서 코칭할 '서 있는' AI 트레이너 아바타(프리팹/FBX)
+    [Header("▼ [씬 자막 UI 연결] ExerciseCanvas/SubtitleCard 연결 시 코드 생성 대신 사용")]
+    [SerializeField] GameObject subtitlePanel; // [추가] 씬 캔버스의 상단 네이비 1줄 토스트 자막
+    [SerializeField] Text subtitleLabel;       // [추가] 씬 캔버스의 토스트 자막 텍스트
+    [SerializeField] float toastDuration = 3f; // [추가] 응원 토스트 자막 자동 숨김 시간(초)
     [Header("▼ [고정 대사] 여기에 글을 적으면 AI 대신 이 문구가 나옵니다")]
     [TextArea(3, 6), SerializeField] string customGreetingText; // 비워두면 Gemini AI가 생성, 글을 적으면 고정 출력
 
@@ -23,6 +27,7 @@ public class TrainerAppear : MonoBehaviour
     Text label;
     string cached;
     bool near, asking, busy;
+    float autoHideTimer = -1f; // [추가] 운동 종료 마무리 자막 자동 숨김 타이머
     GameObject coachAvatar; // 운동 중 플레이어 옆에 서 있는 코치 아바타(coachPrefab에서 생성)
 
     void Awake()
@@ -68,6 +73,7 @@ public class TrainerAppear : MonoBehaviour
                 if (coachAvatar != null)
                 {
                     coachAvatar.name = "AI_Trainer_Coach";
+                    coachAvatar.transform.localScale = seat.lossyScale; // [추가] 기구·보미오와 코치 아바타 키를 1:1 동일 비율로 통일
                     coachAvatar.SetActive(true);
                     if (coachAvatar.GetComponent<CoachStandPose>() == null)
                         coachAvatar.AddComponent<CoachStandPose>(); // T자 자세 -> 서 있는 자세
@@ -115,18 +121,29 @@ public class TrainerAppear : MonoBehaviour
 
     public void SayCoaching(string text)
     {
-        label.text = "AI 트레이너: " + text;
+        if (panel != null) panel.SetActive(true);
+        // [수정] 씬 자막 토스트 사용 시 뱃지가 따로 있으므로 중복 접두어 제거 + 3초 뒤 자동 숨김
+        if (label != null) label.text = subtitlePanel != null ? text : ("AI 트레이너: " + text);
+        if (subtitlePanel != null) autoHideTimer = toastDuration;
         voice?.Say(text);
     }
 
     void Start()
     {
-        var c = UiKit.MakeCanvas("TrainerSpeechCanvas", 40);
-        panel = UiKit.Panel(c.transform, new Vector2(1500, 190), new Vector2(0, 120), new Color(0.1f, 0.13f, 0.2f, 0.92f), new Vector2(0.5f, 0f)).gameObject;
-        label = UiKit.Label(panel.transform, font, "", 38, new Vector2(1420, 170), Vector2.zero, TextAnchor.MiddleLeft);
-        // 창 폭에 맞춰 늘어나게 해서, 창이 좁아도 글이 화면 밖으로 잘리지 않게 한다
-        var pr = (RectTransform)panel.transform; pr.anchorMin = new Vector2(0, 0); pr.anchorMax = new Vector2(1, 0); pr.pivot = new Vector2(0.5f, 0); pr.offsetMin = new Vector2(30, 260); pr.offsetMax = new Vector2(-30, 450); // 아래의 '질문하기' 버튼(~135)과 운동 중 큰 버튼(~240) 위로 올린다
-        var lr = label.rectTransform; lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one; lr.offsetMin = new Vector2(24, 8); lr.offsetMax = new Vector2(-24, -8);
+        if (subtitlePanel != null && subtitleLabel != null)
+        {
+            // [추가] 씬에 배치된 ExerciseCanvas/SubtitleCard를 그대로 사용 (에디터에서 자유 편집 가능)
+            panel = subtitlePanel;
+            label = subtitleLabel;
+        }
+        else
+        {
+            var c = UiKit.MakeCanvas("TrainerSpeechCanvas", 40);
+            panel = UiKit.Panel(c.transform, new Vector2(1500, 190), new Vector2(0, 120), new Color(0.1f, 0.13f, 0.2f, 0.92f), new Vector2(0.5f, 0f)).gameObject;
+            label = UiKit.Label(panel.transform, font, "", 38, new Vector2(1420, 170), Vector2.zero, TextAnchor.MiddleLeft);
+            var pr = (RectTransform)panel.transform; pr.anchorMin = new Vector2(0, 0); pr.anchorMax = new Vector2(1, 0); pr.pivot = new Vector2(0.5f, 0); pr.offsetMin = new Vector2(30, 260); pr.offsetMax = new Vector2(-30, 450);
+            var lr = label.rectTransform; lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one; lr.offsetMin = new Vector2(24, 8); lr.offsetMax = new Vector2(-24, -8);
+        }
         panel.SetActive(false);
         if (trainer != null) trainer.SetActive(false);
         if (machine != null) machine.enabled = false;
@@ -134,6 +151,13 @@ public class TrainerAppear : MonoBehaviour
 
     void Update()
     {
+        // [수정] 운동 중·종료 상관없이 응원 토스트 자막이 toastDuration(3초) 지나면 깔끔하게 자동 숨김
+        if (autoHideTimer > 0f)
+        {
+            autoHideTimer -= Time.deltaTime;
+            if (autoHideTimer <= 0f && panel != null)
+                panel.SetActive(false);
+        }
         if (anchor == null && trainer == null) return;
         if (player == null)
         {

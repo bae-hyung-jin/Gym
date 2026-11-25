@@ -42,6 +42,13 @@ public class FPSController : MonoBehaviour
     // [추가] 유니티 버튼(Btn_MouseLock)의 On Click()에 연결해 마우스 잠금 ON/OFF 전환
     public void ToggleMouseLock() => SetMouseLock(!cursorLocked);
 
+    // [추가] 기구 운동 진입 시 시점 고정 버튼을 즉시 숨기고 마우스 잠금을 해제
+    public void SetExerciseUiHidden(bool hidden)
+    {
+        if (hidden && cursorLocked) SetMouseLock(false);
+        if (mouseLockBtn != null) mouseLockBtn.SetActive(!hidden);
+    }
+
     void SetMouseLock(bool locked)
     {
         cursorLocked = locked;

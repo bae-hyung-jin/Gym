@@ -24,6 +24,7 @@ public class DoorSurvey : MonoBehaviour
 
     [Header("추천 코스 안내 HUD & 이동 포인트 (Unity에서 위치·디자인 수정 가능)")]
     [SerializeField] GameObject routeHud;       // [추가] 왼쪽 위 추천 코스 미니 카드 (RouteCard)
+    [SerializeField] GameObject reopenSurveyBtn; // [추가] 자유 운동 중 왼쪽 위 '맞춤 코스 선택' 버튼 (Btn_ReopenSurvey)
     [SerializeField] Text routeStepText;        // [추가] 예: "추천 코스 · 1 / 3"
     [SerializeField] Text routeMachineText;     // [추가] 예: "체스트프레스"
     [SerializeField] Text routeMoveBtnText;     // [추가] "기구 앞으로 이동 →" / "GX룸으로 이동 →"
@@ -223,6 +224,7 @@ public class DoorSurvey : MonoBehaviour
         // [추가] 추천 코스 HUD 켜기 + 1단계 기구 앞으로 바로 안내!
         if (routeSteps.Count == 0) BuildRoute(out _, out _, out _);
         routeStepIndex = 0;
+        if (reopenSurveyBtn != null) reopenSurveyBtn.SetActive(false); // [추가] 추천 코스 시작 시 '맞춤 코스 선택' 버튼 숨김
         if (routeHud != null) routeHud.SetActive(true);
         if (progressPanel != null) progressPanel.SetActive(true); // [추가] 상단 진행도 바 표시
         RefreshRouteHud();
@@ -241,6 +243,7 @@ public class DoorSurvey : MonoBehaviour
         if (routeHud != null) routeHud.SetActive(false); // [추가] 자유 탐색 시 추천 코스 카드 숨김
         if (progressPanel != null) progressPanel.SetActive(false); // [추가] 자유 탐색 시 진행도 바 숨김
         if (coachBar != null) coachBar.SetActive(false); // [추가] 자유 탐색 시 코칭 바 숨김
+        if (reopenSurveyBtn != null) reopenSurveyBtn.SetActive(true); // [추가] 5번(자유 운동)으로 바로 진입해도 왼쪽 위 '맞춤 코스 선택' 버튼 표시
         trainerVoice?.Stop();
         Debug.Log("[온보딩] 자유 탐색 모드로 시작!");
         CloseOnboarding();
@@ -319,6 +322,7 @@ public class DoorSurvey : MonoBehaviour
     {
         if (routeHud != null) routeHud.SetActive(false);
         if (progressPanel != null) progressPanel.SetActive(false); // [추가] 상단 진행도 바도 함께 닫기
+        if (reopenSurveyBtn != null) reopenSurveyBtn.SetActive(true); // [추가] 코칭 종료 시 '맞춤 코스 선택' 버튼 복구
         CloseCoachBar();
     }
 
