@@ -3,7 +3,102 @@ guid: f150b197a5d7f494783ab502464ca9de
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Hair
+    second: {fileID: 2100000, guid: 92b20004a1c24d3e8f0123456789cd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Skin
+    second: {fileID: 2100000, guid: 92b20003a1c24d3e8f0123456789cd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Sneaker
+    second: {fileID: 2100000, guid: 92b20008a1c24d3e8f0123456789cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackBlack
+    second: {fileID: 2100000, guid: 92b20007a1c24d3e8f0123456789cd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackJacket
+    second: {fileID: 2100000, guid: 92b20005a1c24d3e8f0123456789cd05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackPants
+    second: {fileID: 2100000, guid: 92b20006a1c24d3e8f0123456789cd06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_ZipperMetal
+    second: {fileID: 2100000, guid: 92b20009a1c24d3e8f0123456789cd09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bolt_PhotoTex
+    second: {fileID: 2100000, guid: 9b41e26c8121fbfc81c8f832f3f630e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_CamMetal_PhotoTex
+    second: {fileID: 2100000, guid: 09722e05712a5bcfbd6a0170ed864a09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Chrome_PhotoTex
+    second: {fileID: 2100000, guid: bb084f5fea65efb55740fc4984349a8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Frame_PhotoTex
+    second: {fileID: 2100000, guid: 5e0d442cbdd5eb69d3e7a2fec0506ded, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Leather_PhotoTex
+    second: {fileID: 2100000, guid: 7db04da1303d49872bb09958d2408b8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_PinHole_Dark
+    second: {fileID: 2100000, guid: 03db7df7418c95087d29fcbe1c1a6e15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Placard_PhotoTex
+    second: {fileID: 2100000, guid: 670d47a2942702308a8c4a2ded124256, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Rubber_PhotoTex
+    second: {fileID: 2100000, guid: c209386e3d9a20e950da431c5a521313, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_TowerHood_PhotoTex
+    second: {fileID: 2100000, guid: fbcf6e9ff1f94bc7508d831e55721c8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WeightNumbers_Decal
+    second: {fileID: 2100000, guid: 7e627a2e4315d45d6d96c1da9e27cb03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WeightPlate_PhotoTex
+    second: {fileID: 2100000, guid: c20e380bd57aba0795c672e13e184f8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_YellowKnob_PhotoTex
+    second: {fileID: 2100000, guid: e48a59920b3f18f0f9c7c9c0e544659c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

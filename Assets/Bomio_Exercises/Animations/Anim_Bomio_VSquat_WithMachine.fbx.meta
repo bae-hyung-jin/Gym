@@ -3,7 +3,77 @@ guid: 7b75d5901151da942990e2b700013d98
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Hair
+    second: {fileID: 2100000, guid: 92b20004a1c24d3e8f0123456789cd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Skin
+    second: {fileID: 2100000, guid: 92b20003a1c24d3e8f0123456789cd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Sneaker
+    second: {fileID: 2100000, guid: 92b20008a1c24d3e8f0123456789cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackBlack
+    second: {fileID: 2100000, guid: 92b20007a1c24d3e8f0123456789cd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackJacket
+    second: {fileID: 2100000, guid: 92b20005a1c24d3e8f0123456789cd05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackPants
+    second: {fileID: 2100000, guid: 92b20006a1c24d3e8f0123456789cd06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_ZipperMetal
+    second: {fileID: 2100000, guid: 92b20009a1c24d3e8f0123456789cd09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bracket_DarkSteel_PhotoTex
+    second: {fileID: 2100000, guid: aab4633703e1fbc9b24b9cadc68317d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Chrome_OlympicHorn_PhotoTex
+    second: {fileID: 2100000, guid: 0a0fe5831cd4e527aae4b2322d193a52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Footplate_RibbedTread
+    second: {fileID: 2100000, guid: ab1f94940a07b0682e9796f870decdfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Frame_MatteBlack_PhotoTex
+    second: {fileID: 2100000, guid: 83fe6c43897debf80f9146236442ba18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Leather_BlackPad
+    second: {fileID: 2100000, guid: d95bf3b5a26d9070d77d81e8bfb13769, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Nylon_WhiteBumper
+    second: {fileID: 2100000, guid: 26f3915d192c245f93611e3a9601038d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Rubber_GripAndFeet_PhotoTex
+    second: {fileID: 2100000, guid: 085e0d8345be51ca25b660e82d404f8c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

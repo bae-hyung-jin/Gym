@@ -265,8 +265,13 @@ if m_tr:
 else:
     print("ERROR: Transform 1990010008 not found!")
 
-# 2. Append all new blocks to scene_text
-scene_text = scene_text.rstrip() + "\n" + "\n".join(new_blocks) + "\n"
+# 2. Insert all new blocks BEFORE SceneRoots so Unity loads them cleanly!
+marker_roots = "--- !u!1660057539 &9223372036854775807"
+idx = scene_text.find(marker_roots)
+if idx != -1:
+    scene_text = scene_text[:idx] + "\n".join(new_blocks) + "\n" + scene_text[idx:]
+else:
+    scene_text = scene_text.rstrip() + "\n" + "\n".join(new_blocks) + "\n"
 
 with open(SCENE_PATH, 'w', encoding='utf-8') as f:
     f.write(scene_text)

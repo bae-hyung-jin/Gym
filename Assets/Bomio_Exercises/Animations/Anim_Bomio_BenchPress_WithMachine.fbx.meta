@@ -3,7 +3,82 @@ guid: 251fed0e6365bc642be534b7bc743a07
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Hair
+    second: {fileID: 2100000, guid: 92b20004a1c24d3e8f0123456789cd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Skin
+    second: {fileID: 2100000, guid: 92b20003a1c24d3e8f0123456789cd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Sneaker
+    second: {fileID: 2100000, guid: 92b20008a1c24d3e8f0123456789cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackBlack
+    second: {fileID: 2100000, guid: 92b20007a1c24d3e8f0123456789cd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackJacket
+    second: {fileID: 2100000, guid: 92b20005a1c24d3e8f0123456789cd05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackPants
+    second: {fileID: 2100000, guid: 92b20006a1c24d3e8f0123456789cd06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_ZipperMetal
+    second: {fileID: 2100000, guid: 92b20009a1c24d3e8f0123456789cd09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_AluminumCap_PhotoTex
+    second: {fileID: 2100000, guid: 5afa6fcaaf4924b7ad8754292be96eb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bolt_PhotoTex
+    second: {fileID: 2100000, guid: 04fbd87e1907106e32a56a8942c2b1e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_ChromeHorn_PhotoTex
+    second: {fileID: 2100000, guid: dd30c0eed256acaa7cd600f55aaaaddf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Collar_PhotoTex
+    second: {fileID: 2100000, guid: 3c5b688352b4182295fd3ddde1dc8644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Frame_PhotoTex
+    second: {fileID: 2100000, guid: 70d3976ff4ef74ae3b598e14977510f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_LeatherBench_PhotoTex
+    second: {fileID: 2100000, guid: 8deac8ddee6949f1f56877159dc46350, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Rubber_PhotoTex
+    second: {fileID: 2100000, guid: ea77259abddc64379c3cc0ecabbf97b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_SteelArm_PhotoTex
+    second: {fileID: 2100000, guid: 1f255313714a783e1d2a962ad8fad58c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

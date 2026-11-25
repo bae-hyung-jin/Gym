@@ -38,6 +38,19 @@ public class ExerciseStation : MonoBehaviour
     [SerializeField] Text pullButtonLabel;          // [추가] 버튼 안 동작 문구("밀기"/"당기기"/"펴기")
     [SerializeField] Button stopButton;             // [추가] 오른쪽 하단 '운동 그만하기' 버튼
 
+    [Header("▼ [기구 설명 카드 UI 연결] 05_UI/ExerciseCanvas/MachineInfoCard")]
+    [SerializeField] GameObject infoCardRoot;       // [추가] 기구 접근 시 표시할 씬 UI 설명 카드 루트 (에디터에서 자유 편집)
+    [SerializeField] Text infoTitleText;            // [추가] 카드 제목 텍스트
+    [SerializeField] Text infoPartText;             // [추가] 운동 부위 텍스트
+    [SerializeField] Text infoHowToText;            // [추가] 사용법 텍스트
+    [SerializeField] Text infoCautionText;          // [추가] 안전 팁 텍스트
+
+    [Header("▼ [기구 설명 (인스펙터에서 자유 수정 — 비우면 기본 설명 자동 사용)]")]
+    [SerializeField] string customTargetPart;       // [추가] 인스펙터에서 직접 적을 운동 부위
+    [TextArea(2, 3), SerializeField] string customHowToUse;  // [추가] 인스펙터에서 직접 적을 사용법
+    [TextArea(2, 3), SerializeField] string customSafetyTip; // [추가] 인스펙터에서 직접 적을 안전 팁
+    [SerializeField] string customHudTip;           // [추가] 운동 중 상단 HUD 한 줄 가이드
+
     // 운동 중에는 질문 버튼·T키·시점 고정 버튼을 막아 화면 버튼과 겹치지 않게 한다
     public static bool InUse { get; private set; }
     static ExerciseStation promptOwner;  // [추가] 6대 기구가 하나의 PromptBanner를 공유할 때 충돌 방지
@@ -57,6 +70,8 @@ public class ExerciseStation : MonoBehaviour
     Transform demoHips;       // 기존 시범 캐릭터 Hips 본 (보미오 앉는 위치 1:1 기준)
     bool active, wentDown;
     float pull;
+    float cardioTime;      // [추가] 천국의 계단(스텝밀) 전용: 역재생 없이 앞으로만 계속 오르는 연속 재생 시간(0~1 루프)
+    float cardioStepAccum; // [추가] 한 걸음(1/6 사이클) 누적 카운터
     int reps;
     Vector3 exitPos;
     Vector3 origPlayerScale;
@@ -67,12 +82,21 @@ public class ExerciseStation : MonoBehaviour
 
     static bool uiEventsWired; // [추가] 공유 Canvas 버튼 이벤트 중복 등록 방지
 
+    struct MachineGuide
+    {
+        public string part;      // 운동 부위
+        public string howTo;     // 쉬운 사용 방법
+        public string caution;   // 호흡 · 관절 안전 포인트
+        public string hudTip;    // 운동 중 상단 HUD 보조 가이드
+    }
+
     void Start()
     {
         InUse = false;
         promptOwner = null;
         activeStation = null;
         uiEventsWired = false;
+        if (infoCardRoot != null) infoCardRoot.SetActive(false);
         cc = player.GetComponent<CharacterController>();
         fpCam = player.cameraTransform.GetComponent<Camera>();
         var cg = new GameObject("ExerciseCamera");
@@ -145,15 +169,154 @@ public class ExerciseStation : MonoBehaviour
         }
     }
 
-    // [추가] 기구별 직관적인 동작 동사 반환
+    // [추가] 외부(DoorSurvey 자동 이동)에서 기구 표시 이름을 읽을 수 있도록 프로퍼티 공개
+    public string MachineDisplayName => machineName ?? "";
+
+    // [수정] 신규 5종 포함 11종 기구별 직관적인 동작 동사 반환
     string GetActionVerb()
     {
         if (machineName.Contains("체스트") || machineName.Contains("프레스")) return "밀기";
         if (machineName.Contains("익스텐션")) return "펴기";
+        if (machineName.Contains("어덕션")) return "모으기";
+        if (machineName.Contains("레그컬")) return "굽히기";
+        if (machineName.Contains("계단") || machineName.Contains("스텝밀")) return "오르기";
+        if (machineName.Contains("스쿼트")) return "앉았다 일어서기";
         if (machineName.Contains("암컬")) return "올리기";
         if (machineName.Contains("풀업") || machineName.Contains("턱걸이")) return "올라가기";
         return "당기기";
     }
+
+    // [추가] 신규 5종 포함 헬스장 전체 11종 기구의 운동 부위·사용법·안전 주의사항 데이터베이스
+    MachineGuide GetMachineGuide()
+    {
+        string n = machineName ?? "";
+        if (n.Contains("어덕션"))
+            return new MachineGuide
+            {
+                part = "허벅지 안쪽 · 골반 안정화",
+                howTo = "의자에 등을 편히 붙이고 손잡이를 잡은 뒤, 양 무릎을 안쪽으로 천천히 모았다가 풀어 주세요.",
+                caution = "허리가 등받이에서 뜨지 않게 유지하고, 모을 때 숨을 내쉬세요.",
+                hudTip = "등받이 밀착 · 양 무릎을 부드럽게 모으기 · 아프면 즉시 멈춤"
+            };
+        if (n.Contains("레그컬"))
+            return new MachineGuide
+            {
+                part = "허벅지 뒤쪽 (햄스트링 · 무릎 보호)",
+                howTo = "배와 허벅지를 패드에 대고 엎드린 뒤, 발목 패드를 엉덩이 쪽으로 천천히 접어 올리세요.",
+                caution = "허리가 과하게 꺾이지 않도록 상체를 패드에 붙이고 천천히 내리세요.",
+                hudTip = "무릎은 패드 고정 · 뒤꿈치를 엉덩이 쪽으로 천천히 접기"
+            };
+        if (n.Contains("벤치프레스"))
+            return new MachineGuide
+            {
+                part = "가슴 전체 · 어깨 앞쪽 · 팔 뒤쪽",
+                howTo = "벤치에 등을 대고 발을 바닥에 단단히 디딘 뒤, 양 손잡이를 천장 방향으로 부드럽게 밀어 올리세요.",
+                caution = "어깨가 귀 쪽으로 올라가지 않게 가슴을 펴고, 팔꿈치를 완전히 잠그지 마세요.",
+                hudTip = "양발 바닥 고정 · 가슴을 펴고 천장 방향으로 부드럽게 밀기"
+            };
+        if (n.Contains("계단") || n.Contains("스텝밀"))
+            return new MachineGuide
+            {
+                part = "심폐 지구력 · 하체 전체 체력",
+                howTo = "양쪽 손잡이를 가볍게 잡고 발바닥 전체로 계단을 밟으며 일정한 리듬으로 올라가세요.",
+                caution = "상체가 너무 숙여지지 않게 시선은 정면을 보고, 숨이 차면 바로 멈추세요.",
+                hudTip = "시선 정면 · 손잡이 가볍게 잡기 · 숨이 차면 쉬었다 하세요"
+            };
+        if (n.Contains("스쿼트"))
+            return new MachineGuide
+            {
+                part = "허벅지 전반 · 엉덩이 (등받이 허리 지지)",
+                howTo = "어깨 패드 아래로 들어가 등을 기대고, 무릎을 굽혀 천천히 앉았다가 발판으로 밀어 일어나세요.",
+                caution = "무릎이 안쪽으로 모이지 않게 발끝 방향을 유지하고, 호흡을 참지 마세요.",
+                hudTip = "등받이 밀착 · 무릎과 발끝 같은 방향 · 천천히 앉았다 일어서기"
+            };
+        if (n.Contains("체스트"))
+            return new MachineGuide
+            {
+                part = "가슴 · 팔 뒤쪽 · 상체 밀기 근력",
+                howTo = "등받이에 등을 편하게 붙이고 손잡이를 잡은 뒤, 앞쪽으로 팔을 천천히 뻗어 밀어 주세요.",
+                caution = "밀 때 숨을 내쉬고, 어깨 앞쪽에 통증이 있으면 무리하게 뒤로 젖히지 마세요.",
+                hudTip = "등받이 밀착 · 숨을 내쉬며 앞쪽으로 천천히 밀기"
+            };
+        if (n.Contains("랫풀"))
+            return new MachineGuide
+            {
+                part = "등 근육 · 바른 상체 자세",
+                howTo = "의자에 앉아 위쪽 바를 넓게 잡고, 가슴 위쪽을 향해 팔꿈치를 아래로 천천히 당겨 내리세요.",
+                caution = "허리를 뒤로 과하게 젖히지 말고, 등을 조이는 느낌으로 부드럽게 당기세요.",
+                hudTip = "가슴 펴기 · 팔꿈치를 아래로 부드럽게 당기기"
+            };
+        if (n.Contains("익스텐션"))
+            return new MachineGuide
+            {
+                part = "허벅지 앞쪽 (대퇴사두근 · 무릎 지지)",
+                howTo = "의자에 깊게 앉아 손잡이를 잡고, 발목 패드를 들어 올리듯 무릎을 천천히 펴 주세요.",
+                caution = "무릎을 탁 튕기지 말고 끝에서 잠깐 멈춘 뒤 천천히 내려 주세요.",
+                hudTip = "엉덩이 고정 · 반동 없이 무릎을 천천히 펴기"
+            };
+        if (n.Contains("레그프레스"))
+            return new MachineGuide
+            {
+                part = "허벅지 전반 · 엉덩이 하체 근력",
+                howTo = "등받이에 허리를 꼭 붙이고 발판 중앙에 발을 올린 뒤, 다리 힘으로 발판을 천천히 밀어 주세요.",
+                caution = "무릎을 끝까지 쫙 펴서 잠그지 말고, 약간 여유를 둔 상태로 반복하세요.",
+                hudTip = "허리 등받이 밀착 · 무릎 완전히 잠그지 않기"
+            };
+        if (n.Contains("암컬"))
+            return new MachineGuide
+            {
+                part = "팔 앞쪽 (이두근 · 물건 들기 근력)",
+                howTo = "앞쪽 패드에 팔꿈치를 안정적으로 고정하고, 손잡이를 어깨 쪽으로 천천히 접어 올리세요.",
+                caution = "어깨나 허리 반동을 쓰지 말고 팔 앞쪽 힘으로 부드럽게 올렸다 내려 주세요.",
+                hudTip = "팔꿈치 패드 고정 · 반동 없이 천천히 접어 올리기"
+            };
+        if (n.Contains("풀업") || n.Contains("턱걸이"))
+            return new MachineGuide
+            {
+                part = "등 상부 · 팔 전체 근력",
+                howTo = "위쪽 바를 어깨너비보다 살짝 넓게 잡고, 가슴이 바에 가까워지도록 천천히 끌어올리세요.",
+                caution = "어깨가 아프면 무리하게 매달리지 말고 편한 범위까지만 천천히 연습하세요.",
+                hudTip = "어깨 힘 빼고 가슴을 바 쪽으로 천천히 끌어올리기"
+            };
+        return new MachineGuide
+        {
+            part = "전신 근력 · 균형 운동",
+            howTo = "바른 자세로 기구에 자리 잡고 천천히 움직여 보세요.",
+            caution = "아프거나 불편하면 바로 멈추고 쉬었다 하세요.",
+            hudTip = "아프면 바로 멈추세요 · 쉬었다 하셔도 돼요"
+        };
+    }
+
+    // [추가] 인스펙터에 직접 입력한 설명이 있으면 우선 사용하고, 비어 있으면 기구별 기본 설명 사용
+    MachineGuide GetEffectiveGuide()
+    {
+        var g = GetMachineGuide();
+        if (!string.IsNullOrWhiteSpace(customTargetPart)) g.part    = customTargetPart.Trim();
+        if (!string.IsNullOrWhiteSpace(customHowToUse))   g.howTo   = customHowToUse.Trim();
+        if (!string.IsNullOrWhiteSpace(customSafetyTip))  g.caution = customSafetyTip.Trim();
+        if (!string.IsNullOrWhiteSpace(customHudTip))     g.hudTip  = customHudTip.Trim();
+        return g;
+    }
+
+    // [수정] 씬에 배치된 05_UI/ExerciseCanvas/MachineInfoCard에 설명을 채워 표시 (맞춤 코칭 중에는 숨김)
+    void ShowInfoCard()
+    {
+        if (infoCardRoot == null) return;
+        if (DoorSurvey.IsCoachingActive)
+        {
+            if (infoCardRoot.activeSelf) infoCardRoot.SetActive(false);
+            return;
+        }
+        var g = GetEffectiveGuide();
+        if (infoTitleText != null)   infoTitleText.text   = $"{machineName}  안내";
+        if (infoPartText != null)    infoPartText.text    = $"운동 부위  ·  {g.part}";
+        if (infoHowToText != null)   infoHowToText.text   = $"사용법: {g.howTo}";
+        if (infoCautionText != null) infoCautionText.text = $"안전 팁: {g.caution}";
+        if (!infoCardRoot.activeSelf) infoCardRoot.SetActive(true);
+    }
+
+    // [추가] 천국의 계단(스텝밀)처럼 역재생 없이 앞으로만 계속 오르는 연속 유산소 기구 판별
+    bool IsContinuousCardio() => machineName != null && (machineName.Contains("계단") || machineName.Contains("스텝밀"));
 
     void Update()
     {
@@ -166,16 +329,18 @@ public class ExerciseStation : MonoBehaviour
             var near = !PlayerFreeze.Frozen && !InUse && Flat(player.transform.position - seatPoint.position).magnitude < useRange;
             if (near)
             {
-                // [수정] 가까이 온 기구만 공용 PromptBanner를 켜고 이름을 갱신
+                // [수정] 가까이 온 기구만 공용 PromptBanner + 기구 설명 카드를 함께 표시
                 promptOwner = this;
-                if (promptLabel != null) promptLabel.text = $"{machineName} 운동하기";
+                if (promptLabel != null) promptLabel.text = $"{machineName} 운동하기 (E)";
                 if (promptBanner != null) promptBanner.SetActive(true);
+                ShowInfoCard();
                 if (kb.eKey.wasPressedThisFrame) Begin();
             }
             else if (promptOwner == this)
             {
                 promptOwner = null;
                 if (promptBanner != null) promptBanner.SetActive(false);
+                if (infoCardRoot != null) infoCardRoot.SetActive(false);
             }
             return;
         }
@@ -191,6 +356,40 @@ public class ExerciseStation : MonoBehaviour
         }
 
         bool pressing = kb.spaceKey.isPressed || holdBtn;
+        bool isCardio = IsContinuousCardio();
+
+        if (isCardio)
+        {
+            // [추가] 천국의 계단(스텝밀): 누르는 동안 앞으로만 계속 오르고, 손을 떼면 그 자리에서 부드럽게 정지 (절대 역재생 안 함!)
+            pull = Mathf.MoveTowards(pull, pressing ? 1f : 0f, 2.4f * Time.deltaTime);
+            float delta = pull * 0.28f * Time.deltaTime; // 120프레임(6계단) 기준 자연스러운 오르기 속도
+            cardioTime = (cardioTime + delta) % 1f;
+            cardioStepAccum += delta;
+
+            machine.Play(machineAnimState, 0, cardioTime);
+            machine.Update(0f);
+            SetDemoVisible(false);
+
+            if (playerAnim != null && !string.IsNullOrEmpty(playerAnimState))
+            {
+                playerAnim.Play(playerAnimState, 0, cardioTime);
+                playerAnim.Update(0f);
+            }
+
+            UpdateExerciseUi(pressing);
+
+            // 6계단 루프 중 1계단(1/6 = 0.1667) 오를 때마다 1회(1걸음) 카운트
+            const float oneStep = 1f / 6f;
+            if (cardioStepAccum >= oneStep)
+            {
+                cardioStepAccum -= oneStep;
+                reps++;
+                OnRepCompleted(reps);
+                if (reps >= targetReps) { End(); return; }
+            }
+            return;
+        }
+
         var target = pressing ? 1f : 0f;
         pull = Mathf.MoveTowards(pull, target, pullSpeed * Time.deltaTime);
 
@@ -223,7 +422,7 @@ public class ExerciseStation : MonoBehaviour
         if (hudTitleText != null)
             hudTitleText.text = $"{machineName}  ·  {reps} / {targetReps}회";
         if (hudSubText != null)
-            hudSubText.text = "아프면 바로 멈추세요 · 쉬었다 하셔도 돼요";
+            hudSubText.text = GetEffectiveGuide().hudTip;
 
         if (strengthFill != null)
         {
@@ -280,9 +479,10 @@ public class ExerciseStation : MonoBehaviour
     void Begin()
     {
         active = true; InUse = true; activeStation = this;
-        pull = 0; reps = 0; wentDown = false; holdBtn = false;
+        pull = 0; cardioTime = 0; cardioStepAccum = 0; reps = 0; wentDown = false; holdBtn = false;
         promptOwner = null;
         if (promptBanner != null) promptBanner.SetActive(false);
+        if (infoCardRoot != null) infoCardRoot.SetActive(false);
         if (exerciseHudRoot != null) exerciseHudRoot.SetActive(true);
         if (pullButtonLabel != null) pullButtonLabel.text = $"{GetActionVerb()} (꾹 누르기)";
         UpdateExerciseUi(false);
@@ -335,8 +535,9 @@ public class ExerciseStation : MonoBehaviour
 
         if (trainer != null)
         {
+            var g = GetEffectiveGuide();
             trainer.StartCoaching(seatPoint, faceT, an);
-            trainer.SayCoaching($"좋습니다! {machineName} 운동 시작합니다. 천천히 동작을 따라해 보세요.");
+            trainer.SayCoaching($"{machineName} 운동을 시작합니다! {g.part}에 좋은 기구예요. {g.howTo}");
         }
     }
 

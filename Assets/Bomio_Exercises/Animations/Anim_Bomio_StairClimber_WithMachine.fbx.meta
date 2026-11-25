@@ -3,9 +3,99 @@ guid: d0f40caba3e273540a60e6bd9164e244
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Hair
+    second: {fileID: 2100000, guid: 92b20004a1c24d3e8f0123456789cd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Skin
+    second: {fileID: 2100000, guid: 92b20003a1c24d3e8f0123456789cd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Sneaker
+    second: {fileID: 2100000, guid: 92b20008a1c24d3e8f0123456789cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackBlack
+    second: {fileID: 2100000, guid: 92b20007a1c24d3e8f0123456789cd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackJacket
+    second: {fileID: 2100000, guid: 92b20005a1c24d3e8f0123456789cd05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackPants
+    second: {fileID: 2100000, guid: 92b20006a1c24d3e8f0123456789cd06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_ZipperMetal
+    second: {fileID: 2100000, guid: 92b20009a1c24d3e8f0123456789cd09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Body_Black_PhotoTex
+    second: {fileID: 2100000, guid: 14b807b4e5df3cf907cca6adc44dc283, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Chrome_HRSensor_PhotoTex
+    second: {fileID: 2100000, guid: 3b4cb01f2be81c49ad1db08fdea54af9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Console_ScreenUI
+    second: {fileID: 2100000, guid: 5acb44d14bb11866ce123558280f8b5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Handrail_Rubber_PhotoTex
+    second: {fileID: 2100000, guid: 01293633e125e91679da398dc705e144, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Hub_SDotLogo
+    second: {fileID: 2100000, guid: fc2a948e8c478a02a99b1700f797b70c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Red_SafetyLine
+    second: {fileID: 2100000, guid: 9de61929b2e37eb440342b89be50b8b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Shroud_Charcoal_PhotoTex
+    second: {fileID: 2100000, guid: 4276ad2f07834c0ccd6e594e9dab465d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Side_Wordmark
+    second: {fileID: 2100000, guid: b44629c692b5f45e041f1eda87989625, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Step_DiamondTread
+    second: {fileID: 2100000, guid: 74689059d8cb5e843d10b3b59087e8bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Step_Riser_PhotoTex
+    second: {fileID: 2100000, guid: 42ad866be259fec3c81f0f4aa5b63ba6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Trim_LightGrey_PhotoTex
+    second: {fileID: 2100000, guid: b703fe0242cd33d85244c78abdddc835, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

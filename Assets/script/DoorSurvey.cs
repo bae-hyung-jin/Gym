@@ -125,6 +125,7 @@ public class DoorSurvey : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         if (door != null) door.SetLocked(true); // 문 트리거 모드일 때만 문을 잠근다
     }
 
@@ -250,6 +251,7 @@ public class DoorSurvey : MonoBehaviour
     }
 
     // [추가] 추천 코스 HUD '기구 앞으로 이동 →' 버튼 On Click()
+    // 씬에 배치된 모든 ExerciseStation(11종)을 이름으로 자동 탐색해 기구 앞 안전 위치로 이동
     public void GoCurrentStep()
     {
         if (routeSteps.Count == 0 || routeStepIndex >= routeSteps.Count) return;
@@ -261,13 +263,6 @@ public class DoorSurvey : MonoBehaviour
             return;
         }
 
-        Transform target = null;
-        if (step.Contains("체스트")) target = pointChestPress;
-        else if (step.Contains("익스텐션")) target = pointLegExtension;
-        else if (step.Contains("랫풀")) target = pointLatPulldown;
-        else if (step.Contains("레그프레스")) target = pointLegPress != null ? pointLegPress : pointLegExtension;
-
-        if (target == null) return;
         if (playerTransform == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -275,12 +270,75 @@ public class DoorSurvey : MonoBehaviour
         }
         if (playerTransform == null) return;
 
+        Transform target = null;
+        if (step.Contains("체스트")) target = pointChestPress;
+        else if (step.Contains("익스텐션")) target = pointLegExtension;
+        else if (step.Contains("랫풀")) target = pointLatPulldown;
+        else if (step.Contains("레그프레스")) target = pointLegPress;
+
+        // [추가] 신규 5종 포함 모든 기구는 씬의 ExerciseStation을 자동 탐색해 앞쪽 2.2m 위치로 안내
+        Vector3 destPos;
+        float destYaw;
+        if (target != null)
+        {
+            destPos = target.position;
+            destYaw = target.eulerAngles.y;
+        }
+        else if (TryFindMachineFront(step, out destPos, out destYaw))
+        {
+            // 자동 탐색 성공
+        }
+        else return;
+
         // CharacterController 충돌 방지를 위해 잠시 끄고 이동 후 다시 켠다
         var cc = playerTransform.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false;
-        playerTransform.position = target.position;
-        playerTransform.rotation = Quaternion.Euler(0f, target.eulerAngles.y, 0f);
+        playerTransform.position = new Vector3(destPos.x, playerTransform.position.y, destPos.z);
+        playerTransform.rotation = Quaternion.Euler(0f, destYaw, 0f);
         if (cc != null) cc.enabled = true;
+    }
+
+    // [추가] 추천 단계 이름으로 씬 안의 해당 ExerciseStation을 찾아 기구 앞쪽(2.2m) 좌표와 바라볼 각도를 계산
+    bool TryFindMachineFront(string step, out Vector3 pos, out float yaw)
+    {
+        pos = Vector3.zero;
+        yaw = 0f;
+        var stations = FindObjectsByType<ExerciseStation>(FindObjectsSortMode.None);
+        string[] keywords = { "어덕션", "레그컬", "벤치프레스", "계단", "스텝밀", "스쿼트", "암컬", "풀업", "레그프레스", "체스트", "익스텐션", "랫풀" };
+        string matchedKey = null;
+        foreach (var k in keywords)
+            if (step.Contains(k)) { matchedKey = k; break; }
+        if (string.IsNullOrEmpty(matchedKey)) return false;
+
+        foreach (var st in stations)
+        {
+            if (st == null || !st.enabled) continue;
+            string goName = st.gameObject.name;
+            // ExerciseStation의 machineName 또는 GameObject 이름으로 매칭
+            bool hit = st.MachineDisplayName.Contains(matchedKey)
+                || (matchedKey == "어덕션" && goName.Contains("HipAdduction"))
+                || (matchedKey == "레그컬" && goName.Contains("LyingLegCurl"))
+                || (matchedKey == "벤치프레스" && goName.Contains("BenchPress"))
+                || ((matchedKey == "계단" || matchedKey == "스텝밀") && goName.Contains("StairClimber"))
+                || (matchedKey == "스쿼트" && goName.Contains("VSquat"))
+                || (matchedKey == "암컬" && goName.Contains("ArmCurl"))
+                || (matchedKey == "풀업" && goName.Contains("PullUp"))
+                || (matchedKey == "레그프레스" && goName.Contains("PowerLegPress"));
+            if (!hit) continue;
+
+            Transform t = st.transform;
+            Vector3 fwd = new Vector3(t.forward.x, 0f, t.forward.z).normalized;
+            if (fwd.sqrMagnitude < 0.01f) fwd = Vector3.forward;
+            Vector3 right = Vector3.Cross(Vector3.up, fwd).normalized;
+
+            // [수정] 기구 등받이 뒤쪽이 아니라 정면·측면 3/4 시야에서 기구와 시범 동작이 잘 보이도록 위치 계산
+            bool flipFront = goName.Contains("HipAdduction") || goName.Contains("StairClimber") || goName.Contains("BenchPress");
+            Vector3 viewDir = flipFront ? (-fwd * 1.6f + right * 1.6f) : (fwd * 1.8f + right * 1.2f);
+            pos = t.position + viewDir;
+            yaw = Quaternion.LookRotation((t.position - pos).normalized, Vector3.up).eulerAngles.y;
+            return true;
+        }
+        return false;
     }
 
     // [추가] 추천 코스 HUD '다음 단계 >' 버튼 On Click()
@@ -399,10 +457,26 @@ public class DoorSurvey : MonoBehaviour
         string caution = Summary == "없음" ? "무리하지 마시고" : $"{Summary}에 무리가 가지 않도록";
         if (step.Contains("체스트"))
             return $"여기는 가슴과 팔 힘을 기르는 체스트프레스예요. {caution} 등받이에 등을 편하게 붙이고 천천히 밀어 보세요.";
+        if (step.Contains("벤치프레스"))
+            return $"여기는 가슴과 상체 힘을 탄탄하게 키우는 플레이트 로디드 벤치프레스예요. {caution} 등을 벤치에 안정적으로 붙이고 천천히 밀어 올려 보세요.";
         if (step.Contains("익스텐션"))
             return $"여기는 허벅지 앞쪽을 튼튼하게 하는 레그 익스텐션이에요. {caution} 가벼운 무게로 다리를 천천히 펴 보세요.";
+        if (step.Contains("레그컬"))
+            return $"여기는 허벅지 뒤쪽 근육을 길러 무릎을 보호해 주는 라잉 레그컬이에요. {caution} 엎드린 자세에서 발목을 천천히 접어 올려 보세요.";
+        if (step.Contains("어덕션"))
+            return $"여기는 허벅지 안쪽과 골반을 안정시켜 주는 힙 어덕션이에요. {caution} 의자에 편히 앉아 양 무릎을 부드럽게 모아 보세요.";
+        if (step.Contains("레그프레스"))
+            return $"여기는 허벅지와 엉덩이 힘을 함께 기르는 파워 레그프레스예요. {caution} 등받이에 허리를 꼭 붙이고 발판을 천천히 밀어 보세요.";
+        if (step.Contains("스쿼트"))
+            return $"여기는 등받이가 허리를 받쳐 주면서 하체를 강화하는 V-스쿼트예요. {caution} 어깨 패드에 기대어 천천히 앉았다 일어나 보세요.";
+        if (step.Contains("계단") || step.Contains("스텝밀"))
+            return $"여기는 심폐 지구력과 다리 체력을 함께 키우는 천국의 계단이에요. {caution} 손잡이를 가볍게 잡고 일정한 속도로 한 걸음씩 올라가 보세요.";
         if (step.Contains("랫풀"))
             return $"여기는 등 근육을 부드럽게 키워 주는 랫풀다운이에요. {caution} 가슴을 펴고 바를 천천히 내려 보세요.";
+        if (step.Contains("암컬"))
+            return $"여기는 팔 앞쪽 힘을 길러 일상 물건 들기를 편하게 해 주는 암컬 머신이에요. {caution} 팔꿈치를 패드에 붙이고 천천히 올려 보세요.";
+        if (step.Contains("풀업"))
+            return $"여기는 등과 상체 전체 힘을 기르는 풀업바예요. {caution} 손잡이를 단단히 잡고 무리 없는 범위로 천천히 당겨 보세요.";
         if (step.Contains("GX"))
             return $"여기는 스트레칭을 하는 GX룸 안내 단계예요. {caution} 위 이동 버튼을 눌러 편하게 몸을 풀어 보세요.";
         return $"{step} 기구 앞이에요. {caution} 가볍게 천천히 움직여 보시고 아프면 바로 멈추세요.";
@@ -556,59 +630,149 @@ public class DoorSurvey : MonoBehaviour
         else gameObject.SetActive(false);
     }
 
-    // [추가] 불편 부위별 안전 추천 코스(고정 설계, AI 개입 없음)
+    // [추가] SummaryCard 등에서 현재 추천된 맞춤 코스를 그대로 참조할 수 있도록 공개
+    public static IReadOnlyList<string> CurrentRouteSteps => lastBuiltSteps;
+    // [추가] 맞춤 코칭(추천 코스 HUD 또는 AI 트레이너 말풍선)이 켜져 있는지 여부 -> ExerciseStation 기구 설명 카드 자동 숨김용
+    public static bool IsCoachingActive => instance != null &&
+        ((instance.routeHud != null && instance.routeHud.activeSelf) ||
+         (instance.coachBar != null && instance.coachBar.activeSelf));
+    static DoorSurvey instance;
+    static readonly List<string> lastBuiltSteps = new();
+    static int healthyThemeIndex = 0; // [추가] 불편 부위 없을 때 매번 다른 테마 코스를 순환 추천
+
+    // [수정] 신규 5종 포함 헬스장 전체 11종 기구 + GX룸을 활용한 다양한 부위별 맞춤 코스 생성
     void BuildRoute(out string title, out string route, out string tip)
     {
-        bool avoidBack = Summary.Contains("허리");
+        bool avoidBack     = Summary.Contains("허리");
         bool avoidShoulder = Summary.Contains("어깨") || Summary.Contains("팔");
-        bool avoidKnee = Summary.Contains("무릎");
-        bool weakLegs = Summary.Contains("하체") || Summary.Contains("서 있기");
+        bool avoidKnee     = Summary.Contains("무릎");
+        bool weakLegs      = Summary.Contains("하체") || Summary.Contains("서 있기");
 
-        // [추가] 선택한 불편 부위가 몇 개인지 계산
         int count = (avoidBack ? 1 : 0) + (avoidShoulder ? 1 : 0) + (avoidKnee ? 1 : 0) + (weakLegs ? 1 : 0);
 
         routeSteps.Clear();
+        lastBuiltSteps.Clear();
 
-        // [추가] 3~4개 부위가 동시에 불편한 경우(전신 부담) -> 무리한 근력 기구 대신 가벼운 스트레칭 & 상담 우선!
+        var steps = new List<string>();
+
+        // 1) 3~4개 부위 동시 불편 -> 전신 부담 최소화, 가벼운 좌식·스트레칭 우선
         if (count >= 3)
         {
-            routeSteps.Add("GX룸 의자 스트레칭");
-            routeSteps.Add("체스트프레스 (가벼운 빈 동작)");
+            steps.Add("GX룸 의자 스트레칭");
+            steps.Add("힙 어덕션 (가벼운 빈 동작)");
+            steps.Add("체스트프레스 (가벼운 빈 동작)");
             title = "오늘은 무리 없이 가볍게 시작해요!";
-            route = "1단계 · GX룸 의자 스트레칭\n2단계 · 체스트프레스 (가벼운 빈 동작)\n3단계 · 현장 선생님 상담 후 진행 권장";
-            tip = "여러 부위가 동시에 불편하시니 무리한 기구보다 가벼운 스트레칭과 둘러보기 위주로 천천히 시작해요.";
-            return;
+            tip   = "여러 부위가 동시에 불편하시니 무리한 기구 대신 앉아서 하는 가벼운 동작과 스트레칭 위주로 시작해요.";
+        }
+        // 2) 허리 + 무릎 동시 불편 -> 등받이 밀착 상체 전용 코스
+        else if (avoidBack && avoidKnee)
+        {
+            steps.Add("체스트프레스 (등받이 밀착)");
+            steps.Add("암컬 머신 (좌식)");
+            steps.Add("랫풀다운 (가볍게)");
+            steps.Add("GX룸 의자 스트레칭");
+            title = "허리·무릎 부담 없는 좌식 상체 코스예요!";
+            tip   = "허리와 무릎을 보호하기 위해 의자에 편히 기대어 할 수 있는 상체 기구로만 구성했어요.";
+        }
+        // 3) 허리 + 어깨 동시 불편 -> 좌식/와식 하체 중심 코스
+        else if (avoidBack && avoidShoulder)
+        {
+            steps.Add("힙 어덕션 (좌식)");
+            steps.Add("레그 익스텐션 (가볍게)");
+            steps.Add("라잉 레그컬 (가볍게)");
+            steps.Add("GX룸 스트레칭");
+            title = "허리·어깨를 지키는 하체 집중 코스예요!";
+            tip   = "팔을 들거나 허리를 숙이지 않고도 다리 힘을 기를 수 있는 안전한 기구만 모았어요.";
+        }
+        // 4) 어깨 + 무릎 동시 불편 -> 골반 안정 + 가벼운 팔/스트레칭
+        else if (avoidShoulder && (avoidKnee || weakLegs))
+        {
+            steps.Add("힙 어덕션 (가볍게)");
+            steps.Add("암컬 머신 (가벼운 무게)");
+            steps.Add("GX룸 의자 스트레칭");
+            title = "관절 부담을 줄인 부드러운 회복 코스예요!";
+            tip   = "어깨와 무릎에 무리가 가지 않는 좁은 가동 범위의 안전한 기구와 스트레칭으로 구성했어요.";
+        }
+        // 5) 허리만 불편 -> 등받이 지지 좌식 전신 균형 코스 (서서 하는 스쿼트·스텝밀 제외)
+        else if (avoidBack)
+        {
+            steps.Add("체스트프레스 (등받이 밀착)");
+            steps.Add("힙 어덕션");
+            steps.Add("레그 익스텐션 (가볍게)");
+            steps.Add("암컬 머신");
+            title = "허리를 편안하게 지키는 좌식 균형 코스예요!";
+            tip   = "등받이에 허리를 안정적으로 기댄 채 상·하체를 골고루 단련하는 허리 안전 코스예요.";
+        }
+        // 6) 어깨·팔만 불편 -> 하체·유산소 집중 코스 (벤치프레스·랫풀다운·풀업바 제외)
+        else if (avoidShoulder)
+        {
+            steps.Add("힙 어덕션");
+            steps.Add("라잉 레그컬");
+            steps.Add("파워 레그프레스");
+            steps.Add("천국의 계단 (스텝밀)");
+            title = "어깨 부담 없는 탄탄한 하체·활력 코스예요!";
+            tip   = "팔을 높이 들지 않고 하체 근력과 심폐 체력을 집중적으로 기를 수 있게 구성했어요.";
+        }
+        // 7) 무릎만 불편 -> 상체 근력 + 골반 내전근 안정화 코스 (스쿼트·레그프레스·스텝밀 제외)
+        else if (avoidKnee)
+        {
+            steps.Add("플레이트 로디드 벤치프레스");
+            steps.Add("랫풀다운");
+            steps.Add("암컬 머신");
+            steps.Add("힙 어덕션 (가볍게)");
+            title = "무릎을 지키는 상체·골반 안정 코스예요!";
+            tip   = "무릎을 깊게 굽히는 동작은 빼고 상체 근력과 허벅지 안쪽 안정화 운동으로 채웠어요.";
+        }
+        // 8) 하체 힘 부족 / 오래 서 있기 힘듦 -> 좌식·와식 하체 집중 강화 코스
+        else if (weakLegs)
+        {
+            steps.Add("파워 레그프레스");
+            steps.Add("라잉 레그컬");
+            steps.Add("힙 어덕션");
+            steps.Add("레그 익스텐션 (가볍게)");
+            title = "앉아서·누워서 다리 힘을 키우는 하체 코스예요!";
+            tip   = "오래 서 있지 않아도 허벅지 앞·뒤·안쪽과 엉덩이 근육을 골고루 키울 수 있어요.";
+        }
+        // 9) 불편 부위 없음 -> 3가지 테마 코스를 번갈아 추천해 매번 새로운 전신 루틴 제공!
+        else
+        {
+            int theme = (healthyThemeIndex++) % 3;
+            if (theme == 0)
+            {
+                steps.Add("천국의 계단 (스텝밀)");
+                steps.Add("플레이트 로디드 벤치프레스");
+                steps.Add("V-스쿼트");
+                steps.Add("랫풀다운");
+                title = "활력 전신 근력 · 유산소 코스예요!";
+                tip   = "유산소로 몸을 데운 뒤 가슴·하체·등 대근육을 골고루 단련하는 올라운드 추천 코스예요.";
+            }
+            else if (theme == 1)
+            {
+                steps.Add("파워 레그프레스");
+                steps.Add("라잉 레그컬");
+                steps.Add("체스트프레스");
+                steps.Add("암컬 머신");
+                title = "상·하체 탄탄 집중 근력 코스예요!";
+                tip   = "허벅지 앞뒤를 균형 있게 키우고 가슴과 팔 근육까지 깔끔하게 마무리하는 코스예요.";
+            }
+            else
+            {
+                steps.Add("V-스쿼트");
+                steps.Add("힙 어덕션");
+                steps.Add("풀업바");
+                steps.Add("GX룸 스트레칭");
+                title = "코어·하체·등 밸런스 강화 코스예요!";
+                tip   = "하체와 골반 안정, 등 상부 근력을 키운 뒤 GX룸 스트레칭으로 시원하게 마무리해요.";
+            }
         }
 
-        // [수정] 현재 씬에 배치된 3개 기구(체스트프레스·레그 익스텐션·랫풀다운) + GX룸 기준으로 코스 구성
-        // (파워 레그프레스 배치 후 pointLegPress가 연결되면 자동 확장 가능)
-        var steps = new List<string>();
-        if (!avoidShoulder || avoidKnee || avoidBack)
-            steps.Add("체스트프레스");
-        if (!avoidKnee || weakLegs || avoidShoulder || avoidBack)
-            steps.Add("레그 익스텐션 (가볍게)");
-        if (!avoidShoulder)
-            steps.Add("랫풀다운");
-        steps.Add("GX룸 스트레칭");
-
-        if (steps.Count > 3)
-            steps = steps.GetRange(0, 3);
         routeSteps.AddRange(steps);
+        lastBuiltSteps.AddRange(steps);
 
-        title = "안전한 맞춤 추천 코스를 준비했어요!";
         var lines = new List<string>();
         for (int i = 0; i < steps.Count; i++)
             lines.Add($"{i + 1}단계 · {steps[i]}");
         route = string.Join("\n", lines);
-
-        if (avoidBack)
-            tip = "허리에 부담이 적은 등받이 좌식 기구 위주로 구성했어요.\n원하시면 언제든 자유롭게 둘러보실 수 있어요.";
-        else if (avoidShoulder)
-            tip = "팔을 높이 드는 동작은 빼고 안전한 높이의 기구만 모았어요.\n원하시면 언제든 자유롭게 둘러보실 수 있어요.";
-        else if (avoidKnee)
-            tip = "무릎을 깊게 굽히는 부담은 줄이고 상체·가벼운 하체로 구성했어요.\n원하시면 언제든 자유롭게 둘러보실 수 있어요.";
-        else
-            tip = "오래 서 있지 않고 모두 앉아서 편하게 다리 힘을 키우는 코스예요.\n원하시면 언제든 자유롭게 둘러보실 수 있어요.";
     }
 
     void TurnOffButton(Button b)

@@ -169,33 +169,44 @@ public class SummaryCard : MonoBehaviour
         if (markUpper    != null) markUpper.SetActive(!hasShoulder);
         if (markLower    != null) markLower.SetActive(!hasKnee && !hasLegs);
 
-        // 불편 부위에 맞춘 안전한 추천·체험 기구 3줄 구성
+        // [수정] DoorSurvey에서 생성한 실제 맞춤 코스가 있으면 그대로 반영, 없으면 11종 기구 기반 기본 추천 구성
         string[] names;
         string[] parts;
-        if (hasShoulder && (hasKnee || hasLegs))
+        var built = DoorSurvey.CurrentRouteSteps;
+        if (built != null && built.Count >= 3)
         {
-            names = new[] { "GX룸 의자 스트레칭", "가벼운 호흡 · 이완", "현장 트레이너 맞춤 상담" };
-            parts = new[] { "전신 관절 부드럽게 풀기", "심폐 · 안정 회복", "안전 무게 및 기구 점검" };
+            names = new[] { built[0], built[1], built.Count >= 4 ? $"{built[2]} · {built[3]}" : built[2] };
+            parts = new[] { DescribeMachinePart(built[0]), DescribeMachinePart(built[1]), DescribeMachinePart(built[2]) };
+        }
+        else if (hasShoulder && (hasKnee || hasLegs))
+        {
+            names = new[] { "힙 어덕션 (가볍게)", "암컬 머신 (가벼운 무게)", "GX룸 의자 스트레칭" };
+            parts = new[] { "허벅지 안쪽 · 골반 안정", "팔 앞쪽 근력 (관절 부담 최소)", "전신 관절 부드럽게 풀기" };
         }
         else if (hasShoulder)
         {
-            names = new[] { "파워 레그프레스", "레그 익스텐션 (가볍게)", "GX룸 하체 스트레칭" };
-            parts = new[] { "허벅지 앞쪽 · 엉덩이", "허벅지 앞쪽 (대퇴사두)", "하체 이완 · 균형" };
+            names = new[] { "힙 어덕션", "라잉 레그컬", "파워 레그프레스 · 스텝밀" };
+            parts = new[] { "허벅지 안쪽 · 골반 안정", "허벅지 뒤쪽 (햄스트링)", "하체 근력 · 심폐 체력" };
         }
-        else if (hasKnee || hasLegs)
+        else if (hasKnee)
         {
-            names = new[] { "체스트 프레스 (좌식)", "랫풀다운 (가볍게)", "GX룸 의자 상체 스트레칭" };
-            parts = new[] { "가슴 · 팔 뒤쪽", "등 근육 · 팔", "어깨 · 등 이완" };
+            names = new[] { "플레이트 로디드 벤치프레스", "랫풀다운 · 암컬 머신", "힙 어덕션 (가볍게)" };
+            parts = new[] { "가슴 · 팔 뒤쪽 근력", "등 근육 · 이두근", "허벅지 안쪽 · 골반 안정" };
+        }
+        else if (hasLegs)
+        {
+            names = new[] { "파워 레그프레스", "라잉 레그컬", "힙 어덕션 · 레그 익스텐션" };
+            parts = new[] { "허벅지 전반 · 엉덩이", "허벅지 뒤쪽 (무릎 보호)", "허벅지 안쪽 · 앞쪽 균형" };
         }
         else if (hasBack)
         {
-            names = new[] { "체스트 프레스 (등받이 밀착)", "레그 익스텐션 (좌식)", "GX룸 허리 보호 스트레칭" };
-            parts = new[] { "가슴 · 상체 안정", "허벅지 앞쪽 (허리 부담 최소)", "허리 주변 이완" };
+            names = new[] { "체스트프레스 (등받이 밀착)", "힙 어덕션", "레그 익스텐션 · 암컬 머신" };
+            parts = new[] { "가슴 · 상체 안정", "허벅지 안쪽 · 골반 지지", "하체 · 팔 (허리 부담 최소)" };
         }
         else
         {
-            names = new[] { "체스트 프레스", "파워 레그프레스", "랫풀다운 · GX 스트레칭" };
-            parts = new[] { "가슴 · 어깨 앞쪽", "허벅지 · 엉덩이", "등 근육 · 전신 마무리" };
+            names = new[] { "천국의 계단 (스텝밀)", "플레이트 로디드 벤치프레스", "V-스쿼트 · 랫풀다운" };
+            parts = new[] { "심폐 지구력 · 하체 활력", "가슴 · 상체 근력", "하체 전반 · 등 근육 균형" };
         }
 
         for (int i = 0; i < 3; i++)
@@ -205,6 +216,25 @@ public class SummaryCard : MonoBehaviour
             if (routineParts != null && i < routineParts.Length && routineParts[i] != null)
                 routineParts[i].text = parts[i];
         }
+    }
+
+    // [추가] 신규 5종 포함 11종 기구별 타겟 부위 쉬운 한국어 설명 반환
+    static string DescribeMachinePart(string step)
+    {
+        if (string.IsNullOrEmpty(step)) return "전신 균형 운동";
+        if (step.Contains("어덕션")) return "허벅지 안쪽 · 골반 안정";
+        if (step.Contains("레그컬")) return "허벅지 뒤쪽 (햄스트링 · 무릎 보호)";
+        if (step.Contains("벤치프레스")) return "가슴 · 팔 뒤쪽 (삼두근)";
+        if (step.Contains("계단") || step.Contains("스텝밀")) return "심폐 지구력 · 하체 체력";
+        if (step.Contains("스쿼트")) return "허벅지 전반 · 엉덩이 (허리 지지)";
+        if (step.Contains("레그프레스")) return "허벅지 · 엉덩이 근력";
+        if (step.Contains("익스텐션")) return "허벅지 앞쪽 (대퇴사두)";
+        if (step.Contains("체스트")) return "가슴 · 어깨 앞쪽";
+        if (step.Contains("랫풀")) return "등 근육 · 상체 자세";
+        if (step.Contains("암컬")) return "팔 앞쪽 (이두근)";
+        if (step.Contains("풀업")) return "등 상부 · 팔 근력";
+        if (step.Contains("GX")) return "전신 관절 이완 · 스트레칭";
+        return "전신 균형 · 근력 강화";
     }
 
     void Fill(Data d)

@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: 9f4e2a1b8c7d4e6fa0123456789abc10
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Tablet_Stand
+    second: {fileID: 2100000, guid: d56dbf6a497fd09fabbb8c3b1833161a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Tablet_Chrome
+    second: {fileID: 2100000, guid: eda403e8cfc20c6ab445f959e8fbf910, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Tablet_Bezel
+    second: {fileID: 2100000, guid: 8bdbbab0363ce7d9426885b4687a10e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Tablet_Screen
+    second: {fileID: 2100000, guid: dee5c336186f61e990c8b830d9c244a1, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    globalScale: 1
+    useFileUnits: 1
+    useFileScale: 1
+  importAnimation: 0
+  animationType: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,6 +14,7 @@ public class GeminiClient : MonoBehaviour
     [SerializeField] string fallbackModel = "gemini-3.5-flash-lite"; // 대체: 503/429 발생 시 넘어갈 폴백 모델
     [TextArea, SerializeField] string systemPrompt =
         "너는 어르신을 돕는 헬스장 AI 트레이너다. 두세 문장으로 쉽고 다정하게 한국어로 답한다. " +
+        "현재 헬스장에는 체스트프레스, 플레이트 로디드 벤치프레스, 랫풀다운, 풀업바, 암컬 머신, 파워 레그프레스, 레그 익스텐션, 라잉 레그컬, 힙 어덕션, V-스쿼트, 천국의 계단(스텝밀) 총 11종 기구와 GX룸이 있으니 질문과 불편 부위에 맞춰 다양한 기구를 골고루 추천해 줘. " +
         "'광배근' 같은 어려운 말 대신 '등 근육'처럼 쉬운 말을 쓴다. 아프다는 말이 나오면 운동을 멈추고 쉬게 하며, 병이나 치료는 단정하지 않는다. " +
         "횟수를 권할 때는 10회 안팎으로 가볍게, 쉬었다 해도 된다고 말한다.";
 
@@ -81,8 +82,8 @@ public class GeminiClient : MonoBehaviour
 
         if (string.IsNullOrEmpty(apiKey))
         {
-            Debug.LogWarning("[GeminiClient] API 키를 찾을 수 없어 기본 코칭 안내를 제공합니다.");
-            onDone("안녕하세요! 등을 곧게 펴고 천천히 바를 당겨보세요. 무리하지 마시고 호흡을 고르게 유지해 주시기 바랍니다.");
+            Debug.LogWarning("[GeminiClient] API 키를 찾을 수 없어 기구별 폴백 코칭으로 전환합니다.");
+            onDone("[오류] API 키 없음");
             yield break;
         }
 
@@ -139,10 +140,8 @@ public class GeminiClient : MonoBehaviour
             // 503(과부하) 또는 429(속도제한) 발생 시 대기하지 않고 다음 후보 모델로 즉시 전환
         }
 
-        // 모든 모델 실패 시에도 사용자에게 불쾌한 에러 메시지 대신 자연스러운 안내 멘트 제공
-        onDone(lastCode == 503 || lastCode == 429
-            ? "안녕하세요! 등을 곧게 펴고 천천히 바를 당겨보세요. 무리하지 마시고 호흡을 고르게 유지해 주시기 바랍니다."
-            : $"[오류] {lastCode}");
+        // [수정] 모든 모델 실패 시 [오류] 접두어를 반환해 DoorSurvey의 기구별 맞춤 폴백 코칭이 정확히 실행되도록 함
+        onDone($"[오류] {lastCode}");
     }
 
     // ---- [추가] Gemini 4 + Google Search Grounding으로 실제 유튜브 운동 영상 검색 ----

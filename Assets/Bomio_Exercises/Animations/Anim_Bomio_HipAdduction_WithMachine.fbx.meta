@@ -3,7 +3,107 @@ guid: 5e747f8d40d4d384b9e3f056ba75b0f9
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Hair
+    second: {fileID: 2100000, guid: 92b20004a1c24d3e8f0123456789cd04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Skin
+    second: {fileID: 2100000, guid: 92b20003a1c24d3e8f0123456789cd03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_Sneaker
+    second: {fileID: 2100000, guid: 92b20008a1c24d3e8f0123456789cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackBlack
+    second: {fileID: 2100000, guid: 92b20007a1c24d3e8f0123456789cd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackJacket
+    second: {fileID: 2100000, guid: 92b20005a1c24d3e8f0123456789cd05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_TrackPants
+    second: {fileID: 2100000, guid: 92b20006a1c24d3e8f0123456789cd06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Bomio_ZipperMetal
+    second: {fileID: 2100000, guid: 92b20009a1c24d3e8f0123456789cd09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bolt_PhotoTex
+    second: {fileID: 2100000, guid: e5b67502c5659aea387254cd17f3d303, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_CamMetal_PhotoTex
+    second: {fileID: 2100000, guid: 66e64f710abcd4198ef48dc7bfa16445, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Chrome_PhotoTex
+    second: {fileID: 2100000, guid: 5f09181179f770b67e1972803bc5d6a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Frame_PhotoTex
+    second: {fileID: 2100000, guid: cae9bde5eeba744e2db7ae7b09921607, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Leather_PhotoTex
+    second: {fileID: 2100000, guid: bfb0fb297da7b24863771ef4249c4935, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_PinHole_Dark
+    second: {fileID: 2100000, guid: 87f7ab1aed3ed5b2c63f3e1f0d981cd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Placard_PhotoTex
+    second: {fileID: 2100000, guid: 90667085baa1e790e4b2a50662e6a52e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_RedAnodized_Accent
+    second: {fileID: 2100000, guid: 6aaef96de4907935c80f3885a8534c06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Rubber_PhotoTex
+    second: {fileID: 2100000, guid: f8bdc1064ef882c18538b2f8452d5fdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_TowerShroud_PhotoTex
+    second: {fileID: 2100000, guid: e61953276ba2ab0b13c262f19227b58d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WeightNumbers_Decal
+    second: {fileID: 2100000, guid: 1bf316637c562255edefdb4fbc458f9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WeightPlate_PhotoTex
+    second: {fileID: 2100000, guid: 2b1726c3d96a42f74cc843e2d8424ce8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_WhiteTrim_PhotoTex
+    second: {fileID: 2100000, guid: e98d0a1a3789cc1066095746a25388e2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
