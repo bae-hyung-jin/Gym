@@ -434,12 +434,15 @@ def build_hip_adduction():
     piv_l = bpy.data.objects["Pivot_LegArm_L"]
     piv_r = bpy.data.objects["Pivot_LegArm_R"]
 
+    # Include EVERY moving part on the selected stack (plates + 5~30kg label badges + holes + bushings + spacers + top plate caps + pin!)
+    static_weight_prefixes = ("Weight_GuideRod_", "Weight_TopRodCollar_", "Weight_TopCable", "Weight_BottomBumper")
     moving_weights = [
         o for o in bpy.data.objects
-        if o.type == 'MESH' and (
-            o.name.startswith(("Weight_TopPlate", "Weight_SelectorPin"))
-            or (o.name.startswith(("Weight_Plate_", "Weight_PinHole_", "Weight_PinBushing_"))
-                and o.matrix_world.translation.z > 0.56)
+        if o.type == 'MESH' and o.name.startswith("Weight_")
+        and not o.name.startswith(static_weight_prefixes)
+        and (
+            o.name.startswith(("Weight_TopPlate", "Weight_SelectorPin", "Weight_CableAnchor", "Weight_Red"))
+            or o.matrix_world.translation.z > 0.56
         )
     ]
     piv_w = create_pivot("Pivot_WeightStack", (0, 0.68, 0.58), moving_weights)
@@ -526,12 +529,14 @@ def build_lying_leg_curl():
     sc.frame_start, sc.frame_end = 1, 61
 
     piv_curl = bpy.data.objects["Pivot_LegCurl_Arm"]
+    static_weight_prefixes = ("Weight_GuideRod_", "Weight_TopRodCollar_", "Weight_TopCable", "Weight_BottomBumper")
     moving_weights = [
         o for o in bpy.data.objects
-        if o.type == 'MESH' and (
-            o.name.startswith(("Weight_TopPlate", "Weight_SelectorPin"))
-            or (o.name.startswith(("Weight_Plate_", "Weight_PinHole_", "Weight_PinBushing_"))
-                and o.matrix_world.translation.z > 0.60)
+        if o.type == 'MESH' and o.name.startswith("Weight_")
+        and not o.name.startswith(static_weight_prefixes)
+        and (
+            o.name.startswith(("Weight_TopPlate", "Weight_SelectorPin", "Weight_CableAnchor", "Weight_GuideBushing"))
+            or o.matrix_world.translation.z > 0.59
         )
     ]
     piv_w = create_pivot("Pivot_WeightStack", (-0.18, 0.62, 0.62), moving_weights)

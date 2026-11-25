@@ -406,7 +406,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &30503764
 MonoBehaviour:
@@ -826,7 +826,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &78243554
 Transform:
@@ -1570,7 +1570,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50001, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -2183,7 +2183,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &296541924
 MeshCollider:
@@ -3811,7 +3811,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &398513498
 MeshCollider:
@@ -4246,7 +4246,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 16438ee3f08ac344995a4916d6a51165, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -5311,7 +5311,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 0
 --- !u!4 &447195478
 Transform:
@@ -6653,7 +6653,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &522016075
 Transform:
@@ -6688,7 +6688,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &524329693
 MeshCollider:
@@ -7721,6 +7721,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uC811\uAE30"
+  isContinuousCardio: 0
 --- !u!95 &559079728
 Animator:
   serializedVersion: 7
@@ -7732,7 +7734,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50012, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -8273,7 +8275,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 61f3509e1ecb3a24990ba47f07881e4d, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -8503,7 +8505,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &604160058
 MonoBehaviour:
@@ -11156,7 +11158,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &816721524
 MonoBehaviour:
@@ -11578,7 +11580,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0f2a9082a9fd2554c806687badce4336, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -11655,7 +11657,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &834764933
 MeshCollider:
@@ -11928,7 +11930,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &860750281
 MeshCollider:
@@ -13065,7 +13067,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &941253654
 MeshCollider:
@@ -13176,7 +13178,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!224 &951558622
 RectTransform:
@@ -13272,7 +13274,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &954842171
 Transform:
@@ -15626,7 +15628,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &1117762934
 MonoBehaviour:
@@ -16052,7 +16054,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &1123776185
 MonoBehaviour:
@@ -18733,7 +18735,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1298412636
 Transform:
@@ -19644,7 +19646,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0f2a9082a9fd2554c806687badce4336, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -21383,7 +21385,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &1589289713
 MeshCollider:
@@ -21678,7 +21680,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &1612127516
 MonoBehaviour:
@@ -22461,7 +22463,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!114 &1616605820
 MonoBehaviour:
@@ -24012,7 +24014,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!64 &1741709024
 MeshCollider:
@@ -30423,7 +30425,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 61f3509e1ecb3a24990ba47f07881e4d, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -30894,7 +30896,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1869619118
 Transform:
@@ -31482,7 +31484,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 16438ee3f08ac344995a4916d6a51165, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -31510,7 +31512,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1935853253
 Transform:
@@ -32352,7 +32354,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -32386,7 +32388,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -32420,7 +32422,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -35061,7 +35063,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -40473,7 +40475,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -41661,7 +41663,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -42546,7 +42548,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f19e696763416642bdb49ba380eda1b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50054,7 +50056,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50001, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50213,7 +50215,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50002, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50372,7 +50374,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50003, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50531,7 +50533,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50011, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50591,6 +50593,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uBAA8\uC73C\uAE30"
+  isContinuousCardio: 0
 --- !u!1001 &1994005001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50690,7 +50694,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50012, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50750,6 +50754,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uC811\uAE30"
+  isContinuousCardio: 0
 --- !u!1001 &1994006001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50849,7 +50855,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50013, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -50909,6 +50915,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uBC00\uAE30"
+  isContinuousCardio: 0
 --- !u!1001 &1994007001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51008,7 +51016,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50014, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -51068,6 +51076,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uC624\uB974\uAE30"
+  isContinuousCardio: 1
 --- !u!1001 &1994008001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51167,7 +51177,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50015, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -51227,6 +51237,8 @@ MonoBehaviour:
   customHowToUse: 
   customSafetyTip: 
   customHudTip: 
+  customActionVerb: "\uBC00\uAE30"
+  isContinuousCardio: 0
 --- !u!1 &1994009001
 GameObject:
   m_ObjectHideFlags: 0
@@ -51820,9 +51832,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001004}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001005}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001002 stripped
 GameObject:
@@ -51855,20 +51864,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 0
-  interactRange: 2.8
 --- !u!1001 &1997001011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51943,9 +51938,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001014}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001015}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001012 stripped
 GameObject:
@@ -51978,20 +51970,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 1
-  interactRange: 2.8
 --- !u!1001 &1997001021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52066,9 +52044,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001024}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001025}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001022 stripped
 GameObject:
@@ -52101,20 +52076,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 2
-  interactRange: 2.8
 --- !u!1001 &1997001031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52189,9 +52150,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001034}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001035}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001032 stripped
 GameObject:
@@ -52224,20 +52182,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 3
-  interactRange: 2.8
 --- !u!1001 &1997001041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52312,9 +52256,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001044}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001045}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001042 stripped
 GameObject:
@@ -52347,20 +52288,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 4
-  interactRange: 2.8
 --- !u!1001 &1997001051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52435,9 +52362,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001054}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001055}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001052 stripped
 GameObject:
@@ -52470,20 +52394,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 5
-  interactRange: 2.8
 --- !u!1001 &1997001061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52558,9 +52468,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001064}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001065}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001062 stripped
 GameObject:
@@ -52593,20 +52500,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 6
-  interactRange: 2.8
 --- !u!1001 &1997001071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52681,9 +52574,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001074}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001075}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001072 stripped
 GameObject:
@@ -52716,20 +52606,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 7
-  interactRange: 2.8
 --- !u!1001 &1997001081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52804,9 +52680,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001084}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001085}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001082 stripped
 GameObject:
@@ -52839,20 +52712,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 8
-  interactRange: 2.8
 --- !u!1001 &1997001091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52927,9 +52786,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001094}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001095}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001092 stripped
 GameObject:
@@ -52962,20 +52818,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 9
-  interactRange: 2.8
 --- !u!1001 &1997001101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53050,9 +52892,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1997001104}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997001105}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4e2a1b8c7d4e6fa0123456789abc10, type: 3}
 --- !u!1 &1997001102 stripped
 GameObject:
@@ -53085,20 +52924,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 1.45, z: 0.45}
   m_Center: {x: 0, y: 0.72, z: 0}
---- !u!114 &1997001105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997001102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4e2a1b8c7d4e6fa0123456789abc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TabletStandInteract
-  machineIndex: 10
-  interactRange: 2.8
 --- !u!4 &2000644450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c8295ef85f88c24d83970426f97bcb9, type: 3}
@@ -53273,7 +53098,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 81a2c3d4e5f64789a0b1c2d3e4f50003, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -53567,7 +53392,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!54 &2027288601
 Rigidbody:
@@ -55706,7 +55531,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &2143292242
 Transform:
@@ -56623,7 +56448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000001
 GameObject:
   m_ObjectHideFlags: 0
@@ -56636,6 +56461,8 @@ GameObject:
   - component: {fileID: 1998000003}
   - component: {fileID: 1998000004}
   - component: {fileID: 1998000005}
+  - component: {fileID: 1998000300}
+  - component: {fileID: 1998000301}
   m_Layer: 5
   m_Name: ScreenCanvas_00
   m_TagString: Untagged
@@ -56711,7 +56538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -56727,6 +56554,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000005}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000027
 GameObject:
   m_ObjectHideFlags: 0
@@ -57042,7 +56942,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000022
 GameObject:
   m_ObjectHideFlags: 0
@@ -57055,6 +56955,8 @@ GameObject:
   - component: {fileID: 1998000024}
   - component: {fileID: 1998000025}
   - component: {fileID: 1998000026}
+  - component: {fileID: 1998000302}
+  - component: {fileID: 1998000303}
   m_Layer: 5
   m_Name: ScreenCanvas_01
   m_TagString: Untagged
@@ -57130,7 +57032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -57146,6 +57048,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000026}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000048
 GameObject:
   m_ObjectHideFlags: 0
@@ -57461,7 +57436,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000043
 GameObject:
   m_ObjectHideFlags: 0
@@ -57474,6 +57449,8 @@ GameObject:
   - component: {fileID: 1998000045}
   - component: {fileID: 1998000046}
   - component: {fileID: 1998000047}
+  - component: {fileID: 1998000304}
+  - component: {fileID: 1998000305}
   m_Layer: 5
   m_Name: ScreenCanvas_02
   m_TagString: Untagged
@@ -57549,7 +57526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -57565,6 +57542,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000047}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000069
 GameObject:
   m_ObjectHideFlags: 0
@@ -57880,7 +57930,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000064
 GameObject:
   m_ObjectHideFlags: 0
@@ -57893,6 +57943,8 @@ GameObject:
   - component: {fileID: 1998000066}
   - component: {fileID: 1998000067}
   - component: {fileID: 1998000068}
+  - component: {fileID: 1998000306}
+  - component: {fileID: 1998000307}
   m_Layer: 5
   m_Name: ScreenCanvas_03
   m_TagString: Untagged
@@ -57968,7 +58020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -57984,6 +58036,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000068}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000090
 GameObject:
   m_ObjectHideFlags: 0
@@ -58299,7 +58424,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000085
 GameObject:
   m_ObjectHideFlags: 0
@@ -58312,6 +58437,8 @@ GameObject:
   - component: {fileID: 1998000087}
   - component: {fileID: 1998000088}
   - component: {fileID: 1998000089}
+  - component: {fileID: 1998000308}
+  - component: {fileID: 1998000309}
   m_Layer: 5
   m_Name: ScreenCanvas_04
   m_TagString: Untagged
@@ -58387,7 +58514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -58403,6 +58530,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000089}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000111
 GameObject:
   m_ObjectHideFlags: 0
@@ -58718,7 +58918,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000106
 GameObject:
   m_ObjectHideFlags: 0
@@ -58731,6 +58931,8 @@ GameObject:
   - component: {fileID: 1998000108}
   - component: {fileID: 1998000109}
   - component: {fileID: 1998000110}
+  - component: {fileID: 1998000310}
+  - component: {fileID: 1998000311}
   m_Layer: 5
   m_Name: ScreenCanvas_05
   m_TagString: Untagged
@@ -58806,7 +59008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -58822,6 +59024,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000110}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000132
 GameObject:
   m_ObjectHideFlags: 0
@@ -59137,7 +59412,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000127
 GameObject:
   m_ObjectHideFlags: 0
@@ -59150,6 +59425,8 @@ GameObject:
   - component: {fileID: 1998000129}
   - component: {fileID: 1998000130}
   - component: {fileID: 1998000131}
+  - component: {fileID: 1998000312}
+  - component: {fileID: 1998000313}
   m_Layer: 5
   m_Name: ScreenCanvas_06
   m_TagString: Untagged
@@ -59225,7 +59502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -59241,6 +59518,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000131}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000153
 GameObject:
   m_ObjectHideFlags: 0
@@ -59556,7 +59906,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000148
 GameObject:
   m_ObjectHideFlags: 0
@@ -59569,6 +59919,8 @@ GameObject:
   - component: {fileID: 1998000150}
   - component: {fileID: 1998000151}
   - component: {fileID: 1998000152}
+  - component: {fileID: 1998000314}
+  - component: {fileID: 1998000315}
   m_Layer: 5
   m_Name: ScreenCanvas_07
   m_TagString: Untagged
@@ -59644,7 +59996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -59660,6 +60012,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000152}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000174
 GameObject:
   m_ObjectHideFlags: 0
@@ -59975,7 +60400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000169
 GameObject:
   m_ObjectHideFlags: 0
@@ -59988,6 +60413,8 @@ GameObject:
   - component: {fileID: 1998000171}
   - component: {fileID: 1998000172}
   - component: {fileID: 1998000173}
+  - component: {fileID: 1998000316}
+  - component: {fileID: 1998000317}
   m_Layer: 5
   m_Name: ScreenCanvas_08
   m_TagString: Untagged
@@ -60063,7 +60490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -60079,6 +60506,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000173}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000195
 GameObject:
   m_ObjectHideFlags: 0
@@ -60394,7 +60894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000190
 GameObject:
   m_ObjectHideFlags: 0
@@ -60407,6 +60907,8 @@ GameObject:
   - component: {fileID: 1998000192}
   - component: {fileID: 1998000193}
   - component: {fileID: 1998000194}
+  - component: {fileID: 1998000318}
+  - component: {fileID: 1998000319}
   m_Layer: 5
   m_Name: ScreenCanvas_09
   m_TagString: Untagged
@@ -60482,7 +60984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -60498,6 +61000,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000194}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1998000216
 GameObject:
   m_ObjectHideFlags: 0
@@ -60813,7 +61388,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1.15
-  m_Text: "\uD074\uB9AD / F\uD0A4\uB85C \uC0C1\uC138 \uBCF4\uAE30" 
+  m_Text: "\uD074\uB9AD\uD558\uC5EC \uC0C1\uC138 \uBCF4\uAE30"
 --- !u!1 &1998000211
 GameObject:
   m_ObjectHideFlags: 0
@@ -60826,6 +61401,8 @@ GameObject:
   - component: {fileID: 1998000213}
   - component: {fileID: 1998000214}
   - component: {fileID: 1998000215}
+  - component: {fileID: 1998000320}
+  - component: {fileID: 1998000321}
   m_Layer: 5
   m_Name: ScreenCanvas_10
   m_TagString: Untagged
@@ -60901,7 +61478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.06, g: 0.11, b: 0.19, a: 0.94}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -60917,6 +61494,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1998000320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1998000321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998000211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.85, g: 0.98, b: 1, a: 1}
+    m_PressedColor: {r: 0.65, g: 0.88, b: 0.95, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1998000215}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1992000200}
+        m_TargetAssemblyTypeName: GymTabletGuide, Assembly-CSharp
+        m_MethodName: OpenMachine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

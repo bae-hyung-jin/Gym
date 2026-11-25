@@ -69,6 +69,13 @@ public class GymTabletGuide : MonoBehaviour
         else if (tabletPanel.activeSelf && kb.escapeKey.wasPressedThisFrame) CloseTablet();
     }
 
+    // Unity 3D 태블릿 화면 Button OnClick(int index)에서 한 번에 해당 기구 설명 열기
+    public void OpenMachine(int index)
+    {
+        SelectMachine(index);
+        OpenTablet();
+    }
+
     // Unity 버튼 OnClick()에서 바로 연결
     public void OpenTablet()
     {

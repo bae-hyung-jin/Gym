@@ -50,6 +50,8 @@ public class ExerciseStation : MonoBehaviour
     [TextArea(2, 3), SerializeField] string customHowToUse;  // [추가] 인스펙터에서 직접 적을 사용법
     [TextArea(2, 3), SerializeField] string customSafetyTip; // [추가] 인스펙터에서 직접 적을 안전 팁
     [SerializeField] string customHudTip;           // [추가] 운동 중 상단 HUD 한 줄 가이드
+    [SerializeField] string customActionVerb;       // [추가] 인스펙터에서 직접 정할 버튼 문구 (예: 밀기, 모으기, 오르기)
+    [SerializeField] bool isContinuousCardio;       // [추가] 천국의 계단처럼 앞으로만 계속 오르는 유산소 기구 체크박스
 
     // 운동 중에는 질문 버튼·T키·시점 고정 버튼을 막아 화면 버튼과 겹치지 않게 한다
     public static bool InUse { get; private set; }
@@ -172,9 +174,10 @@ public class ExerciseStation : MonoBehaviour
     // [추가] 외부(DoorSurvey 자동 이동)에서 기구 표시 이름을 읽을 수 있도록 프로퍼티 공개
     public string MachineDisplayName => machineName ?? "";
 
-    // [수정] 신규 5종 포함 11종 기구별 직관적인 동작 동사 반환
+    // [수정] 인스펙터에 직접 적은 버튼 문구가 있으면 우선 사용, 비어 있으면 기구 이름으로 자동 선택
     string GetActionVerb()
     {
+        if (!string.IsNullOrWhiteSpace(customActionVerb)) return customActionVerb.Trim();
         if (machineName.Contains("체스트") || machineName.Contains("프레스")) return "밀기";
         if (machineName.Contains("익스텐션")) return "펴기";
         if (machineName.Contains("어덕션")) return "모으기";
@@ -315,8 +318,8 @@ public class ExerciseStation : MonoBehaviour
         if (!infoCardRoot.activeSelf) infoCardRoot.SetActive(true);
     }
 
-    // [추가] 천국의 계단(스텝밀)처럼 역재생 없이 앞으로만 계속 오르는 연속 유산소 기구 판별
-    bool IsContinuousCardio() => machineName != null && (machineName.Contains("계단") || machineName.Contains("스텝밀"));
+    // [수정] 인스펙터 체크박스(isContinuousCardio) 우선, 미체크 시 기구 이름으로 자동 판별
+    bool IsContinuousCardio() => isContinuousCardio || (machineName != null && (machineName.Contains("계단") || machineName.Contains("스텝밀")));
 
     void Update()
     {
