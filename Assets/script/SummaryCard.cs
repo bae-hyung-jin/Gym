@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; // [추가] 메인(Intro) 씬 복귀용
 using UnityEngine.UI;
 
 // 헬스장 문으로 나가면 Gemini가 네 칸(잘 맞아요 / 선생님께 질문 / 다음에 해 보세요 / 선생님과 먼저 확인)으로 정리한 카드를 보여 준다.
@@ -29,14 +30,31 @@ public static class SessionLog
 
 public class SummaryCard : MonoBehaviour
 {
-    [SerializeField] float insideZ = -7f;   // 이보다 안쪽(+z)으로 들어갔다가
-    [SerializeField] float outsideZ = -11f; // 이보다 바깥(-z)으로 나오면 카드를 띄운다
+    [Header("자동 퇴장 감지 (기본 OFF — 위 버튼으로 직접 열기 추천)")]
+    [SerializeField] bool autoOpenOnExit = false; // [추가] 문 밖으로 나갈 때 자동으로 띄울지 여부
+    [SerializeField] float insideZ = -7f;         // 이보다 안쪽(+z)으로 들어갔다가
+    [SerializeField] float outsideZ = -11f;       // 이보다 바깥(-z)으로 나오면 카드를 띄운다
     Transform player;
     bool wasInside;
 
-    [SerializeField] Font font;
-    [SerializeField] Font fontBold;
     [SerializeField] GeminiClient client;
+
+    [Header("SummaryCanvas UI 직접 연결 (디자인·버튼 클릭은 Unity에서 관리)")]
+    [SerializeField] GameObject root;             // [추가] SummaryPopup (카드 전체)
+    [SerializeField] GameObject openBtn;          // [추가] 오른쪽 위 '체험 끝내기 · 요약' 버튼
+    [SerializeField] GameObject buttons;          // [추가] 이미지 저장 시 숨길 하단 버튼 묶음
+    [SerializeField] Text sub;                    // [추가] 날짜 · 체험 기구 부제 텍스트
+    [SerializeField] Text[] body = new Text[4];   // [추가] 4칸 본문 텍스트 (잘 맞아요 / 질문 / 다음 / 확인)
+
+    [Header("바디맵 하이라이트 & 운동 리스트 (Unity 캔버스에서 위치·색상 수정 가능)")]
+    [SerializeField] GameObject markBack;         // [추가] 허리 주의 하이라이트
+    [SerializeField] GameObject markShoulder;     // [추가] 어깨·팔 주의 하이라이트
+    [SerializeField] GameObject markKnee;         // [추가] 무릎 주의 하이라이트
+    [SerializeField] GameObject markLegs;         // [추가] 하체·허벅지 주의 하이라이트
+    [SerializeField] GameObject markUpper;        // [추가] 상체 추천·운동 부위 하이라이트
+    [SerializeField] GameObject markLower;        // [추가] 하체 추천·운동 부위 하이라이트
+    [SerializeField] Text[] routineNames = new Text[3]; // [추가] 오른쪽 운동 리스트 기구명 3줄
+    [SerializeField] Text[] routineParts = new Text[3]; // [추가] 오른쪽 운동 리스트 자극 부위 3줄
 
     const string Key = "summary_card";
     [Serializable] class Data { public string date, machine, ok, ask, next, check; public int reps; }
@@ -45,54 +63,61 @@ public class SummaryCard : MonoBehaviour
     [DllImport("__Internal")] static extern void DownloadFile(string name, byte[] data, int size);
 #endif
 
-    GameObject root, buttons;
-    Text title, sub;
-    readonly Text[] body = new Text[4];
     Data current;
     bool open;
 
     void Start()
     {
-        var c = UiKit.MakeCanvas("SummaryCardCanvas", 80);
-        root = new GameObject("Card", typeof(RectTransform));
-        root.transform.SetParent(c.transform, false);
-        var t = root.transform;
-        UiKit.Panel(t, new Vector2(2000, 1200), Vector2.zero, new Color(0, 0, 0, 0.6f));
-        UiKit.Panel(t, new Vector2(1100, 980), Vector2.zero, Color.white);
-        UiKit.Panel(t, new Vector2(1100, 520), new Vector2(0, 230), new Color(0.965f, 0.94f, 0.9f));
-
-        string[] head = { "✓ 잘 맞아요", "? 선생님께 질문", "+ 다음에 해 보세요", "! 선생님과 먼저 확인" };
-        for (var i = 0; i < 4; i++)
-        {
-            var x = i % 2 == 0 ? -235f : 235f; var y = i < 2 ? 345f : 115f;
-            var green = i % 2 == 1;
-            UiKit.Panel(t, new Vector2(440, 220), new Vector2(x, y), green ? new Color(0.93f, 0.96f, 0.88f) : Color.white);
-            UiKit.Label(t, fontBold, head[i], 38, new Vector2(400, 56), new Vector2(x, y + 68), TextAnchor.MiddleLeft, new Color(0.1f, 0.1f, 0.1f));
-            body[i] = UiKit.Label(t, font, "", 30, new Vector2(400, 130), new Vector2(x, y - 22), TextAnchor.UpperLeft, new Color(0.25f, 0.25f, 0.25f));
-        }
-        title = UiKit.Label(t, fontBold, "4칸 요약 카드", 58, new Vector2(960, 80), new Vector2(0, -75), TextAnchor.MiddleLeft, new Color(0.1f, 0.1f, 0.1f));
-        sub = UiKit.Label(t, font, "", 32, new Vector2(960, 120), new Vector2(0, -170), TextAnchor.UpperLeft, new Color(0.45f, 0.45f, 0.45f));
-
-        buttons = new GameObject("Buttons", typeof(RectTransform));
-        buttons.transform.SetParent(t, false);
-        UiKit.Btn(buttons.transform, fontBold, "이미지로 저장", 36, new Vector2(340, 90), new Vector2(-200, -390), new Color(0.12f, 0.4f, 0.3f)).onClick.AddListener(() => StartCoroutine(SaveImage()));
-        UiKit.Btn(buttons.transform, fontBold, "닫기", 36, new Vector2(240, 90), new Vector2(150, -390), new Color(0.4f, 0.4f, 0.4f)).onClick.AddListener(Close);
-        root.SetActive(false);
+        // [수정] 옛날 UiKit 코드 생성 30줄 삭제! Unity에서 만든 SummaryCanvas를 그대로 사용
+        if (root != null) root.SetActive(false);
     }
 
     void Update()
     {
-        if (root == null) return; // Start가 끝나 카드 UI가 만들어진 뒤부터 동작한다
-        if (player == null) { var p = GameObject.FindGameObjectWithTag("Player"); if (p != null) player = p.transform; }
-        if (player != null && !open)
+        if (root == null) return;
+
+        // [추가] 팝업·운동 중에는 오른쪽 위 '체험 끝내기' 버튼을 깔끔하게 숨김
+        bool showOpen = !open && !ExerciseStation.InUse && !PlayerFreeze.Frozen;
+        if (openBtn != null && openBtn.activeSelf != showOpen) openBtn.SetActive(showOpen);
+
+        if (autoOpenOnExit)
         {
-            var z = player.position.z;
-            if (z > insideZ) wasInside = true;
-            else if (z < outsideZ && wasInside) { wasInside = false; Make(SessionLog.Summary(), SessionLog.Total); } // 헬스장을 나왔다
+            if (player == null) { var p = GameObject.FindGameObjectWithTag("Player"); if (p != null) player = p.transform; }
+            if (player != null && !open)
+            {
+                var z = player.position.z;
+                if (z > insideZ) wasInside = true;
+                else if (z < outsideZ && wasInside) { wasInside = false; Make(SessionLog.Summary(), SessionLog.Total); }
+            }
         }
+
         var kb = Keyboard.current;
-        if (kb != null && !open && !PlayerFreeze.Frozen && kb.cKey.wasPressedThisFrame && PlayerPrefs.HasKey(Key))
+        if (kb == null) return;
+        if (open && kb.escapeKey.wasPressedThisFrame) Close(); // [추가] ESC로도 요약 카드 닫기
+        else if (!open && !PlayerFreeze.Frozen && kb.cKey.wasPressedThisFrame && PlayerPrefs.HasKey(Key))
             Display(JsonUtility.FromJson<Data>(PlayerPrefs.GetString(Key)));
+    }
+
+    // [추가] Unity 버튼(Btn_EndExperience) On Click()에 연결
+    public void OpenSummary() => Make(SessionLog.Summary(), SessionLog.Total);
+
+    // [추가] Unity 버튼(Btn_SaveImage) On Click()에 연결
+    public void SaveCardImage() => StartCoroutine(SaveImage());
+
+    // [수정] public 변경 → Unity 버튼(Btn_Close) On Click()에 연결
+    public void Close()
+    {
+        if (!open) return;
+        open = false;
+        if (root != null) root.SetActive(false);
+        PlayerFreeze.Pop();
+    }
+
+    // [추가] Unity 버튼(Btn_GoMain) On Click()에 연결 — 메인(Intro) 씬으로 복귀
+    public void GoToMain()
+    {
+        Close();
+        SceneManager.LoadScene(0); // Build Settings 0번(Intro 씬)으로 안전하게 이동
     }
 
     // 헬스장을 나올 때 호출한다. Gemini 답이 올 때까지 "정리하는 중"을 보여 준다.
@@ -123,30 +148,79 @@ public class SummaryCard : MonoBehaviour
     {
         if (d == null) return;
         Fill(d);
+        UpdateBodyMapAndRoutines(); // [추가] 불편 부위·추천 기구에 맞춰 바디맵과 운동 리스트 갱신
         if (open) return;
         open = true; root.SetActive(true); PlayerFreeze.Push();
     }
 
-    void Fill(Data d)
+    // [추가] 설문(DoorSurvey.Summary)에 따라 인체 바디맵 부위 하이라이트 + 운동 리스트 3줄을 자동 표시
+    void UpdateBodyMapAndRoutines()
     {
-        if (d == null || body[0] == null) return; // 저장된 글을 못 읽었거나 UI가 아직 없으면 건너뛴다
-        current = d;
-        body[0].text = d.ok; body[1].text = d.ask; body[2].text = d.next; body[3].text = d.check;
-        sub.text = "체험이 끝나면 다음에 무엇을 할지 네 칸으로 정리해\n현장 선생님께 이어 줍니다.   " + d.date + " · " + d.machine;
+        string s = DoorSurvey.Summary ?? "";
+        bool hasBack     = s.Contains("허리");
+        bool hasShoulder = s.Contains("어깨") || s.Contains("팔");
+        bool hasKnee     = s.Contains("무릎");
+        bool hasLegs     = s.Contains("하체") || s.Contains("서 있기");
+
+        if (markBack     != null) markBack.SetActive(hasBack);
+        if (markShoulder != null) markShoulder.SetActive(hasShoulder);
+        if (markKnee     != null) markKnee.SetActive(hasKnee);
+        if (markLegs     != null) markLegs.SetActive(hasLegs);
+        if (markUpper    != null) markUpper.SetActive(!hasShoulder);
+        if (markLower    != null) markLower.SetActive(!hasKnee && !hasLegs);
+
+        // 불편 부위에 맞춘 안전한 추천·체험 기구 3줄 구성
+        string[] names;
+        string[] parts;
+        if (hasShoulder && (hasKnee || hasLegs))
+        {
+            names = new[] { "GX룸 의자 스트레칭", "가벼운 호흡 · 이완", "현장 트레이너 맞춤 상담" };
+            parts = new[] { "전신 관절 부드럽게 풀기", "심폐 · 안정 회복", "안전 무게 및 기구 점검" };
+        }
+        else if (hasShoulder)
+        {
+            names = new[] { "파워 레그프레스", "레그 익스텐션 (가볍게)", "GX룸 하체 스트레칭" };
+            parts = new[] { "허벅지 앞쪽 · 엉덩이", "허벅지 앞쪽 (대퇴사두)", "하체 이완 · 균형" };
+        }
+        else if (hasKnee || hasLegs)
+        {
+            names = new[] { "체스트 프레스 (좌식)", "랫풀다운 (가볍게)", "GX룸 의자 상체 스트레칭" };
+            parts = new[] { "가슴 · 팔 뒤쪽", "등 근육 · 팔", "어깨 · 등 이완" };
+        }
+        else if (hasBack)
+        {
+            names = new[] { "체스트 프레스 (등받이 밀착)", "레그 익스텐션 (좌식)", "GX룸 허리 보호 스트레칭" };
+            parts = new[] { "가슴 · 상체 안정", "허벅지 앞쪽 (허리 부담 최소)", "허리 주변 이완" };
+        }
+        else
+        {
+            names = new[] { "체스트 프레스", "파워 레그프레스", "랫풀다운 · GX 스트레칭" };
+            parts = new[] { "가슴 · 어깨 앞쪽", "허벅지 · 엉덩이", "등 근육 · 전신 마무리" };
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (routineNames != null && i < routineNames.Length && routineNames[i] != null)
+                routineNames[i].text = names[i];
+            if (routineParts != null && i < routineParts.Length && routineParts[i] != null)
+                routineParts[i].text = parts[i];
+        }
     }
 
-    void Close()
+    void Fill(Data d)
     {
-        if (!open) return;
-        open = false; root.SetActive(false); PlayerFreeze.Pop();
+        if (d == null || body == null || body.Length < 4 || body[0] == null) return;
+        current = d;
+        body[0].text = d.ok; body[1].text = d.ask; body[2].text = d.next; body[3].text = d.check;
+        if (sub != null) sub.text = d.date + "  ·  체험 기록: " + d.machine;
     }
 
     IEnumerator SaveImage()
     {
-        buttons.SetActive(false); // 버튼은 이미지에 안 나오게 한다
+        if (buttons != null) buttons.SetActive(false); // 버튼은 이미지에 안 나오게 한다
         yield return new WaitForEndOfFrame();
         var tex = ScreenCapture.CaptureScreenshotAsTexture();
-        buttons.SetActive(true);
+        if (buttons != null) buttons.SetActive(true);
         var png = tex.EncodeToPNG(); Destroy(tex);
         var name = $"요약카드_{DateTime.Now:yyyyMMdd_HHmm}.png";
 #if UNITY_WEBGL && !UNITY_EDITOR

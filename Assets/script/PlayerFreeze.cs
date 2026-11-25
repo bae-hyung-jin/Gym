@@ -14,7 +14,8 @@ public static class PlayerFreeze
 
     static void Apply()
     {
-        Cursor.lockState = Frozen ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = Frozen;
+        // [수정] 팝업이 닫혀도 마우스를 잠그지 않고 항상 자유롭게 보이도록 유지
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

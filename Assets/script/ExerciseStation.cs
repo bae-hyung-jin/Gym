@@ -180,7 +180,7 @@ public class ExerciseStation : MonoBehaviour
     void End()
     {
         active = false; InUse = false; hudRoot.SetActive(false); controlsRoot.SetActive(false); holdBtn = false;
-        Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;
+        // [수정] 기구 운동이 끝나도 마우스를 잠그지 않고 항상 보이게 유지
         pose.enabled = false; cam.gameObject.SetActive(false); fpCam.enabled = true;
         foreach (var r in headParts) r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly; // 다시 1인칭용으로
         player.transform.position = exitPos;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -61,10 +62,13 @@ public class GeminiClient : MonoBehaviour
         StartCoroutine(EnsureApiKey());
     }
 
-    [Serializable] class Part { public string text; }
+    [Serializable] class Part { public string text; public bool thought; } // [수정] 생각(thought) 파트 구분용 필드 추가
     [Serializable] class Content { public Part[] parts; }
-    [Serializable] class GenCfg { public int maxOutputTokens = 320; } // 짧은 코칭 답변용 출력 토큰 제한
+    [Serializable] class ThinkingCfg { public string thinkingLevel = "LOW"; } // [추가] Gemini 4 내부 생각 토큰을 줄여 빠르게 응답
+    [Serializable] class GenCfg { public int maxOutputTokens = 2048; }        // [수정] 생각 토큰 + 한국어 답변이 중간에 안 잘리게 320 -> 2048 확대
+    [Serializable] class GenCfg4 { public int maxOutputTokens = 2048; public ThinkingCfg thinkingConfig = new ThinkingCfg(); }
     [Serializable] class Request { public Content system_instruction; public Content[] contents; public GenCfg generationConfig = new GenCfg(); }
+    [Serializable] class Request4 { public Content system_instruction; public Content[] contents; public GenCfg4 generationConfig = new GenCfg4(); }
     [Serializable] class Candidate { public Content content; }
     [Serializable] class Response { public Candidate[] candidates; }
 
@@ -82,12 +86,8 @@ public class GeminiClient : MonoBehaviour
             yield break;
         }
 
-        var body = new Request
-        {
-            system_instruction = new Content { parts = new[] { new Part { text = systemPrompt } } },
-            contents = new[] { new Content { parts = new[] { new Part { text = question } } } }
-        };
-        var json = Encoding.UTF8.GetBytes(JsonUtility.ToJson(body));
+        var sysInstr = new Content { parts = new[] { new Part { text = systemPrompt } } };
+        var usrCont  = new[] { new Content { parts = new[] { new Part { text = question } } } };
         long lastCode = 0;
 
         // 시도할 모델 후보 목록 (우선순위 순서)
@@ -98,6 +98,12 @@ public class GeminiClient : MonoBehaviour
 
         foreach (var m in models)
         {
+            // [수정] Gemini 4 모델에는 thinkingLevel=LOW를 함께 보내 응답 속도를 높이고 문장 잘림을 방지
+            string jsonStr = m.StartsWith("gemini-4")
+                ? JsonUtility.ToJson(new Request4 { system_instruction = sysInstr, contents = usrCont })
+                : JsonUtility.ToJson(new Request  { system_instruction = sysInstr, contents = usrCont });
+            var json = Encoding.UTF8.GetBytes(jsonStr);
+
             var url = $"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent?key={apiKey}";
             using var req = new UnityWebRequest(url, "POST");
             req.uploadHandler = new UploadHandlerRaw(json);
@@ -114,9 +120,17 @@ public class GeminiClient : MonoBehaviour
                 var ok = res?.candidates != null && res.candidates.Length > 0 && res.candidates[0].content?.parts?.Length > 0;
                 if (ok)
                 {
-                    Debug.Log($"[Gemini] {m} 응답 성공");
-                    onDone(res.candidates[0].content.parts[0].text);
-                    yield break;
+                    // [수정] 최신 Gemini는 답변을 여러 parts 조각으로 나눠 보내므로 thought를 제외한 모든 텍스트 조각을 이어 붙인다
+                    var sb = new StringBuilder();
+                    foreach (var p in res.candidates[0].content.parts)
+                        if (!p.thought && !string.IsNullOrEmpty(p.text)) sb.Append(p.text);
+                    var fullText = sb.ToString().Trim();
+                    if (!string.IsNullOrEmpty(fullText))
+                    {
+                        Debug.Log($"[Gemini] {m} 응답 성공");
+                        onDone(fullText);
+                        yield break;
+                    }
                 }
             }
 
@@ -129,6 +143,125 @@ public class GeminiClient : MonoBehaviour
         onDone(lastCode == 503 || lastCode == 429
             ? "안녕하세요! 등을 곧게 펴고 천천히 바를 당겨보세요. 무리하지 마시고 호흡을 고르게 유지해 주시기 바랍니다."
             : $"[오류] {lastCode}");
+    }
+
+    // ---- [추가] Gemini 4 + Google Search Grounding으로 실제 유튜브 운동 영상 검색 ----
+    [Serializable] class SearchTool { public string type = "google_search"; }
+    [Serializable] class SearchInterReq
+    {
+        public string model;
+        public string input;
+        public SearchTool[] tools;
+    }
+    [Serializable] class SearchCitation { public string type; public string url; public string title; }
+    [Serializable] class SearchContent { public string type; public string text; public SearchCitation[] annotations; }
+    [Serializable] class SearchStep { public string type; public SearchContent[] content; }
+    [Serializable] class SearchInterRes { public SearchStep[] steps; }
+
+    static readonly Regex YouTubeIdRegex = new Regex(
+        @"(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})",
+        RegexOptions.Compiled);
+
+    // 불편 부위와 추천 기구에 맞는 실제 유튜브 시니어 운동 영상을 구글 검색으로 찾아 (url, 설명) 반환한다.
+    // 못 찾으면 ("", "")을 돌려주어 DoorSurvey의 검수된 안전 영상으로 자동 폴백된다.
+    public void SearchYouTubeVideo(string discomfortSummary, string recommendedRoute, Action<string, string> onDone)
+        => StartCoroutine(SearchYouTubeRoutine(discomfortSummary, recommendedRoute, onDone));
+
+    IEnumerator SearchYouTubeRoutine(string discomfortSummary, string recommendedRoute, Action<string, string> onDone)
+    {
+        yield return StartCoroutine(EnsureApiKey());
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            Debug.LogWarning("[Gemini Search] API 키가 없어 검수된 기본 영상으로 전환합니다.");
+            onDone("", "");
+            yield break;
+        }
+
+        string prompt =
+            $"65세 이상 어르신이 '{discomfortSummary}' 불편함이 있을 때 안전하게 따라 할 수 있는 한국어 유튜브 운동 시범 영상을 구글 검색해서 1개만 찾아줘.\n" +
+            $"추천 코스 참고: {recommendedRoute.Replace("\n", ", ")}\n" +
+            "반드시 실제 존재하는 youtube.com 또는 youtu.be 전체 주소를 포함하고, 어르신이 이해하기 쉽게 왜 이 영상이 좋은지 1문장으로만 짧게 설명해줘.";
+
+        var reqObj = new SearchInterReq
+        {
+            model = model,
+            input = prompt,
+            tools = new[] { new SearchTool() }
+        };
+        var json = Encoding.UTF8.GetBytes(JsonUtility.ToJson(reqObj));
+
+        using var req = new UnityWebRequest("https://generativelanguage.googleapis.com/v1beta/interactions", "POST");
+        req.uploadHandler = new UploadHandlerRaw(json);
+        req.downloadHandler = new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+        req.SetRequestHeader("x-goog-api-key", apiKey);
+        req.timeout = 10;
+
+        Debug.Log($"[Gemini Search] 실시간 유튜브 영상 검색 시작 ({model})...");
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            var res = JsonUtility.FromJson<SearchInterRes>(req.downloadHandler.text);
+            string foundUrl = "";
+            string foundText = "";
+
+            if (res?.steps != null)
+            {
+                for (int s = res.steps.Length - 1; s >= 0; s--)
+                {
+                    var st = res.steps[s];
+                    if (st?.type != "model_output" || st.content == null) continue;
+                    foreach (var c in st.content)
+                    {
+                        if (c == null) continue;
+                        // 1) 공식 구글 검색 인용(annotations)에서 실제 유튜브 URL 우선 추출
+                        if (string.IsNullOrEmpty(foundUrl) && c.annotations != null)
+                        {
+                            foreach (var a in c.annotations)
+                            {
+                                if (a != null && !string.IsNullOrEmpty(a.url))
+                                {
+                                    var m = YouTubeIdRegex.Match(a.url);
+                                    if (m.Success)
+                                    {
+                                        foundUrl = "https://www.youtube.com/watch?v=" + m.Groups[1].Value;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        // 2) 응답 텍스트에서도 유튜브 URL 추출 + 설명 텍스트 수집
+                        if (!string.IsNullOrEmpty(c.text))
+                        {
+                            if (string.IsNullOrEmpty(foundText)) foundText = c.text.Trim();
+                            if (string.IsNullOrEmpty(foundUrl))
+                            {
+                                var m = YouTubeIdRegex.Match(c.text);
+                                if (m.Success)
+                                    foundUrl = "https://www.youtube.com/watch?v=" + m.Groups[1].Value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(foundUrl))
+            {
+                // URL 문자열을 제거해 깔끔한 한국어 한 줄 설명만 추출
+                string cleanDesc = Regex.Replace(foundText, @"https?://\S+", "").Trim();
+                if (cleanDesc.Length > 90) cleanDesc = cleanDesc.Substring(0, 90) + "...";
+                Debug.Log($"[Gemini Search] 유튜브 영상 발견: {foundUrl}");
+                onDone(foundUrl, cleanDesc);
+                yield break;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"[Gemini Search] 검색 실패 ({req.responseCode}): {req.error}");
+        }
+
+        onDone("", "");
     }
 
     // ---- 음성(TTS) ----
